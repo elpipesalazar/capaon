@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block titulo %}{{ titulo }}{% endblock %}
+
+
+{% block cuerpo %}
+	{% if Mision %}
+		{% for n in Mision %}
+			<h2>{{ n.titulo }}</h2>
+			<p>{{ n.Descripcion }}</p>
+		{% endfor %}
+	{% else %}
+		<p>Mision No definida aun</p>
+	{% endif %}
+	{% if Vision %}
+		{% for m in Vision %}
+			<h2>{{ m.titulo }}</h2>
+			<p>{{ m.Descripcion }}</p>
+		{% endfor %}
+	{% else %}
+		<p>Vision No definida aun</p>
+	{% endif %}
+{% endblock %}

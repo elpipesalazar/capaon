@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link rel="stylesheet" href="/media/css/estilo.css">
+		<title>{% block titulo %}{% endblock %}</title>
+	</head>
+	<body>
+		{% block cabecera %}
+			<nav>
+				<ul>
+					<li><a href="/"> Inicio</a></li>
+					<li><a href="{% url vista_acerca %}"> Quienes Somos</a></li>
+					<li><a href="{% url vista_MisionVision %}"> Mision y Vision</a></li>
+					<li><a href="/"> Capacitacion</a></li>
+					<li><a href="{% url vista_Contacto %}"> Contactenos</a></li>
+				</ul>
+			</nav>
+		{% endblock %}
+		{% block cuerpo %}{% endblock %}
+	</body>
+</html>		

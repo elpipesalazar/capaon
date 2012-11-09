@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block titulo %}{{ titulo }}{% endblock %}
+{% block cuerpo %}
+	{% if QuienesSomos %}
+		{% for n in QuienesSomos %}
+			<h2>{{ n.titulo }}</h2>
+			<p>{{ n.Descripcion }}</p>
+		{% endfor %}
+	{% else %}
+		Contenido sin definir
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block titutlo %}Contáctanos{% endblock%}
+{% block cuerpo %}
+<form action="">
+	<fieldset>
+		<p><label for="">Nombre<input type="text"></label></p>
+		<p><label for="">Email<input type="email" placeholder="tuemail@ejemplo.com"></label></p>
+		<p><label for="">Comentario:
+			<textarea name="" id="" cols="30" rows="10"></textarea>
+		</label></p>
+		<input type="submit" value="enviar">
+	</fieldset>
+</form>
+{% endblock %}
