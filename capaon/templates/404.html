@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block titulo %}Estamos contruyendo :( {% endblock %}
+{% block estiloIn %} 
+<style>
+    ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
+    ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
+    h1 { margin: 5px 10px; font-size: 50px; text-align: center; }
+    h1 span { color: #bbb; }
+    p { margin: 1em 0; display: block;}
+    .container { max-width: 380px; _width: 380px; margin: 30px auto 0; padding: 10px; font-size: 20px;}
+    /* google search */
+   
+  </style>
+{% endblock %}
+{% block cuerpo %}
+  <div class="container">
+    <h1>Aún NO <span>:(</span></h1><br><br>
+    <p>Lo sentimos, pero por ahora estamos construyendo esta sección</p>
+    <p>Sé paciente, pronto estará lista!!!</p>
+  </div>
+{% endblock %}

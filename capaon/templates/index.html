@@ -1,10 +1,24 @@
 {% extends "base.html" %}
-{% block titulo %}{{ titulo }}{% endblock %}
+{% block titulo %} CAPAON - Servicios de Capacitación {% endblock %}
+{% block clasem1 %}active{% endblock %}
 {% block cuerpo %}
-<header>
-	<h1>capaOn</h1>	
-</header>
-<section>
-	<a href="register">registrarse</a>
-</section>
+<div class="wrapper">
+	<section class="col1">
+		{% if QuienesSomos %}
+			{% for q in QuienesSomos%}
+				<h2 class="under">{{ q.titulo}}</h2>
+				<div class="wrapper">
+					<figure class="left marg_right1"><img src="/media/images/page1_img1.jpg" alt=""></figure>
+					<p class="pad_bot1">{{ q.Descripcion}}</p>
+				</div>
+			{% endfor %}
+		{% else %}
+			<h2 class= "under"> Titulo de Quienes Somos</h2>
+			<div class="wraper">
+				<p class="pad_bot1">Contenido de Quienes Somos</p>
+			</div>
+		{% endif %}
+	</section>
+</div>
+	
 {% endblock %}

@@ -1,14 +1,47 @@
 {% extends "base.html" %}
 {% block titutlo %}Contáctanos{% endblock%}
+{% block clasem4 %}active{% endblock %}
 {% block cuerpo %}
-<form action="">
-	<fieldset>
-		<p><label for="">Nombre<input type="text"></label></p>
-		<p><label for="">Email<input type="email" placeholder="tuemail@ejemplo.com"></label></p>
-		<p><label for="">Comentario:
-			<textarea name="" id="" cols="30" rows="10"></textarea>
-		</label></p>
-		<input type="submit" value="enviar">
-	</fieldset>
+<section class="col1">
+	<h2 class="under">Formulario Contacto</h2>
+	<form id="ContactForm" method="post">
+	<div>
+		<div  class="wrapper">
+			<span>Tu Nombre:</span>
+			<input type="text" class="input" >
+		</div>
+		<div  class="wrapper">
+			<span>Tu Ciudad:</span>
+			<input type="text" class="input" >
+		</div>
+		<div  class="wrapper">
+			<span>Tu E-mail:</span>
+			<input type="text" class="input" >
+		</div>
+		<div  class="textarea_box">
+			<span>Tu Mensaje:</span>
+			<textarea name="textarea" cols="1" rows="1"></textarea>
+		</div>
+		<a href="" onClick="document.getElementById('ContactForm').submit()">Enviar</a>
+		<a href="" onClick="document.getElementById('ContactForm').reset()">Limpiar</a>
+	</div>
 </form>
+</section>
+<section class="col2 pad_left1">
+	<h2 class="under">Contacto</h2>
+	{% if datos %}
+		{% for d in datos %}
+	<div id="address"><span>Pais:<br>
+			Ciudad:<br>
+			Telefono:<br>
+			Email:</span>
+			{{d.Pais}}<br>
+			{{d.Ciudad}}<br>
+			{{d.Telefono}}<br>
+			<a href="mailto:" class="color2">{{d.Email}}</a></div>
+		{% endfor %}
+	{% else %}
+		Datos no definidos aun
+	{% endif %}
+</section>
 {% endblock %}

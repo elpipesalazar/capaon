@@ -1,9 +1,12 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		
-	</head>
-	<body>
-		Esta es la plantilla de registro
-	</body>
-</html>
+{% extends "base.html" %}
+{% block titulo %}Registro de Cliente Empresa {% endblock %}
+{% block cuerpo%}
+	<form action="">
+		<fieldset>
+			<legend>Registro de Usuario Empresarial</legend>
+			{% csrf_token %}
+			{{ EmpresaForm.as_p}}
+			<input type="submit" value="Registrarse">
+		</fieldset>
+	</form>
+{% endblock %}
