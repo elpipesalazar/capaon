@@ -21,8 +21,6 @@ class Empresa(models.Model):
 	Direccion = models.CharField(max_length=150)
 	Email = models.EmailField(unique=True)
 
-class Curso(models.Model):
-	Nombre = models.CharField(max_length=100)
 
 class Contacto(models.Model):
 	Empresa = models.CharField(max_length=100, primary_key=True)
@@ -33,3 +31,6 @@ class Contacto(models.Model):
 
 	def __unicode__(self):
 		return self.Empresa
+
+class Curso(models.Model):
+	Nombre = models.CharField(max_length=100)
