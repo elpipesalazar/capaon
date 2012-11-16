@@ -11,7 +11,7 @@ body{background:#000;border:0;font:14px "Trebuchet MS", Arial, Helvetica, sans-s
 .css3{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;box-shadow:0 0 4px rgba(0, 0, 0, .4);-moz-box-shadow:0 0 4px rgba(0, 0, 0, .4);-webkit-box-shadow:0 0 4px rgba(0, 0, 0, .4);position:relative}
 .body1{background:url(/media/images/bg.jpg) bottom center repeat}
 .body2{background:url(/media/images/bg_top2.gif) bottom repeat-x}
-.body3{background:#fff}
+.body3{background:#fff; padding-top: 20px;}
 .body4{background:url(/media/images/bg.jpg) top center repeat}
 .body5{background:url(/media/images/bg_top_img.jpg) center bottom no-repeat}
 /* Global Structure ============================================================= */
@@ -25,10 +25,10 @@ h2.under{border-bottom:1px solid #e5e5e5;margin-bottom:25px}
 h3{font-size:26px;color:#000;line-height:1.2em;letter-spacing:-0px;padding-bottom:16px;font-weight:400;font-style:normal}
 h3 span{display:block;margin-top:-7px}
 * + html h3 span{margin-top:-25px}
-h3 .dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(media/images/dropcap1.gif) 0 0 no-repeat;font-size:38px;color:#fff;text-align:center;font-weight:700;line-height:1.2em;padding-top:6px}
+h3 .dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(/media/images/dropcap1.gif) 0 0 no-repeat;font-size:38px;color:#fff;text-align:center;font-weight:700;line-height:1.2em;padding-top:6px}
 h4{font-size:26px;line-height:1.2em;color:#fff;font-weight:400;padding:43px 0 15px 0}
 h5{font-size:33px;color:#000;line-height:1.7em;padding:0 0 16px 0;font-weight:400;font-style:normal}
-h5 .dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(media/images/dropcap1.gif) 0 0 no-repeat;color:#fff;text-align:center}
+h5 .dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(/media/images/dropcap1.gif) 0 0 no-repeat;color:#fff;text-align:center}
 h5 .dropcap strong{font-weight:700;font-size:34px;line-height:1.2em;display:block;padding-top:3px;letter-spacing:-2px}
 h5 .dropcap span{font-weight:400;font-size:14px;line-height:1.2em;display:block;margin-top:-8px}
 h6{font-size:20px;line-height:1.2em;color:#000;padding:0 0 5px 0;font-style:normal;font-weight:400}
