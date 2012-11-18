@@ -1,15 +1,16 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-from capaon.apps.home.models import Contenido, Contacto
+from capaon.apps.home.models import Contenido, Contacto, Curso
 from capaon.apps.home.forms import EmpresaForm
 
 #vista del index (pagina incial)
 def index_view(request):
+	num = 1
 	titulo = "Capacitaciones Online - CAPAON"
 	quienesSomos = Contenido.objects.filter(titulo = 'Quienes Somos')
-	ctx = {'titulo':titulo, 'QuienesSomos':quienesSomos}
-	return render_to_response('index.html',ctx,context_instance = RequestContext(request))
+	cursos = Curso.objects.all()
+	return render_to_response('index.html',locals(),context_instance = RequestContext(request))
 
 #vista de Registro de Usuario
 def register_view(request):

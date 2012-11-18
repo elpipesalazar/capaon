@@ -31,63 +31,64 @@ class Contacto(models.Model):
 	def __unicode__(self):
 		return self.Empresa
 
-class Objetivo(models.Model):
-	Descripcion = models.TextField()
-
 
 class Horario(models.Model):
 	Dia = models.CharField(max_length=40, choices = dias)
-	De = models.IntegerField()
-	Hasta = models.IntegerField()
+	De = models.CharField(max_length=40)
+	Hasta = models.CharField(max_length=40)
+
+	def __unicode__(self):
+		return self.Dia + " " + self.De + " a " + self.Hasta
 
 
 class Facilitador(models.Model):
 	Nombre = models.CharField(max_length=100)
-	Descripcion = models.TextField()
+	Descripcion = models.TextField(blank=True)
 
+	def __unicode__(self):
+		return self.Nombre
 
-class Fase(models.Model):
-	Descripcion = models.TextField()
-
-
-class FasesModulo(models.Model):
-	Nombre = models.CharField(max_length=100)
-	Fases = models.ManyToManyField(Fase)
 
 
 class Modulo(models.Model):
 	Numero = models.IntegerField()
-	Nombre = models.CharField(max_length=50)
+	Nombre = models.CharField(max_length=100)
 	Duracion = models.IntegerField()
 	Facilitador = models.ManyToManyField(Facilitador)
-	Fases = models.ManyToManyField(FasesModulo)
+	Contenido = models.TextField()
+
+	def __unicode__(self):
+		return self.Nombre
 	
 class Curso(models.Model):
-	Nombre = models.CharField(max_length=100, primary_key=True)
+	Nombre = models.CharField(max_length=100, unique=True)
 	Generalidades = models.TextField()
-	Objetivos = models.ManyToManyField(Objetivo)
-	Duracion = models.IntegerField()
-	Horario = models.ForeignKey(Horario)
+	Objetivos = models.TextField()
+	Duracion = models.IntegerField(help_text="Horas")
+	Horario = models.ManyToManyField(Horario)
 	Metodologia = models.TextField()
-	Contenido = models.ForeignKey(Modulo)
+	Contenido = models.ManyToManyField(Modulo)
 	Estado = models.CharField(choices= EstadoCurso, max_length=50)
 	CupoMin = models.IntegerField()
 	CupoMax = models.IntegerField()
-	Matriculados = models.ManyToManyField(Cliente)
-	#Inscritos = models.ManyToManyField(Cliente)
+
+	def __unicode__(self):
+		return self.Nombre
 
 
-class Empresa(models.Model):
-	Nombre = models.CharField(max_length=100)
-	NIT = models.CharField(max_length=100, primary_key=True)
-	Telefono = models.CharField(max_length=30)
-	Fax = models.CharField(max_length=30)
-	Actividad = models.CharField(max_length=100)
-	Pais = models.CharField(max_length=50, choices=pais)
-	Direccion = models.CharField(max_length=150)
-	Email = models.EmailField(unique=True)
+class Cliente(models.Model):
 	Estado = models.CharField(choices = estadoCliente, max_length=50)
 	Potencial = models.BooleanField()
+
+class Empresa(models.Model):	
+	RazonSocial = models.CharField(max_length=100)
+	NIT = models.CharField(max_length=100, primary_key=True)
+	Direccion = models.CharField(max_length=150)
+	Actividad = models.CharField(max_length=100)
+	Telefono = models.CharField(max_length=30)
+	Fax = models.CharField(max_length=30)
+	Email = models.EmailField(unique=True)
+	Pais = models.CharField(max_length=50, choices=pais)
 	
 	def __unicode__(self):
 		return self.Nombre
@@ -96,15 +97,13 @@ class Empresa(models.Model):
 class Individual(models.Model):
 	Nombre = models.CharField(max_length=100)
 	Apellido = models.CharField(max_length=100)
-	Email = models.EmailField()
 	Cedula = models.CharField(max_length=100)
-	FechaNacimiento = models.DateField()
 	Direccion = models.CharField(max_length=100)
-	Pais = models.CharField(choices=pais, max_length=50)
-	Telefono = models.CharField(max_length=100)
+	FechaNacimiento = models.DateField()
+	Telefono = models.CharField(max_length=30)
 	Celular = models.CharField(max_length=100)
-   	Estado = models.CharField(choices = estadoCliente, max_length=50)
-	Potencial = models.BooleanField()
+	Email = models.EmailField(unique=True)
+	Pais = models.CharField(max_length=50, choices=pais)
 	
 	def __unicode__(self):
-		return self.Nombre
+		return self.Nombre + self.Apellido
