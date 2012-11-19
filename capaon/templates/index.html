@@ -3,37 +3,26 @@
 {% block clasem1 %}active{% endblock %}
 
 {% block cursos %}
-		<div class="wrapper">
-			<section class="cols">
-				<h3><span class="dropcap">1</span>Curso 1<span> puede parte del nombre del curso</span></h3>
-				<p class="pad_bot1">descripcion del curso</p>
-				<a href="aca va el link del curso 1" class="link1">Ver mas...</a>
-			</section>
-			<section class="cols pad_left1">
-				<h3><span class="dropcap">2</span>Curso 2<span> puede ir parte del nombre del curso</span></h3>
-				<p class="pad_bot1">descripcion del curso</p>
-				<a href="aca va el link del curso 2" class="link1">Ver mas...</a>
-			</section>
-			<section class="cols pad_left1">
-				<h3><span class="dropcap">3</span>curso 3<span>parte del nombre curso</span></h3>
-				<p class="pad_bot1">descripcion del curso</p>
-				<a href="aca va el link del curso 3" class="link1">Ver mas...</a>
-			</section>
-			<section class="cols pad_left1">
-				<h3><span class="dropcap">4</span>curson 4<span>parte del nombre curso</span></h3>
-				<p class="pad_bot1">descripcion del curso</p>
-				<a href="aca va el link del curso 4" class="link1">Ver mas...</a>
-			</section>
-		</div>
-
+	<div class="wrapper">
+		{% if cursos %}
+			{% for c in cursos %}
+				<section class="cols">
+					<h3><span class="dropcap">{{ forloop.counter }}</span>Curso<span>{{c.Nombre}}</span></h3>
+					<p class="pad_bot1">{{ c.Generalidades|truncatewords:"12"}}</p>
+					<a href="capacitacion/{{c.id}}" class="link1">Ver mas...</a>
+				</section>
+			{% endfor %}
+			
+		{% endif %}
+	</div>
 {% endblock %}
 
 
 {% block cuerpo %}
 <div class="wrapper">
 	<section class="col1">
-		{% if QuienesSomos %}
-			{% for q in QuienesSomos%}
+		{% if quienesSomos %}
+			{% for q in quienesSomos%}
 				<h2 class="under">{{ q.titulo}}</h2>
 				<div class="wrapper">
 					<figure class="left marg_right1"><img src="/media/images/page1_img1.jpg" alt=""></figure>
@@ -50,3 +39,18 @@
 </div>
 	
 {% endblock %}
+{% block datos %}
+	{% if contacto %}
+		{% for c in contacto  %}
+			<h4>{{c.Empresa}}</h4>
+			<ul class="address">
+				<li><span>País:</span>{{ c.Pais }}</li>
+				<li><span>Ciudad:</span>{{ c.Ciudad }}</li>
+				<li><span>Teléfono:</span>{{ c.Telefono }}</li>
+				<li><span>Email:</span><a href="mailto:">{{ c.Email }}</a></li>
+			</ul>
+		{% endfor %}
+	{% else %}
+		<h4>datos no definidos</h4>
+	{% endif %}
+{% endblock datos %}

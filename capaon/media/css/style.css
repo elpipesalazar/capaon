@@ -11,7 +11,7 @@ body{background:#000;border:0;font:14px "Trebuchet MS", Arial, Helvetica, sans-s
 .css3{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;box-shadow:0 0 4px rgba(0, 0, 0, .4);-moz-box-shadow:0 0 4px rgba(0, 0, 0, .4);-webkit-box-shadow:0 0 4px rgba(0, 0, 0, .4);position:relative}
 .body1{background:url(/media/images/bg.jpg) bottom center repeat}
 .body2{background:url(/media/images/bg_top2.gif) bottom repeat-x}
-.body3{background:#fff; padding-top: 20px;}
+.body3{background:#fff; padding-top: 20px; min-height: 200px;}
 .body4{background:url(/media/images/bg.jpg) top center repeat}
 .body5{background:url(/media/images/bg_top_img.jpg) center bottom no-repeat}
 /* Global Structure ============================================================= */
@@ -22,10 +22,10 @@ a:hover{text-decoration:none}
 h1{float:left}
 h2{font-size:40px;font-style:normal;font-weight:400;line-height:1.2em;padding:38px 0 11px 0;color:#000;letter-spacing:-1px}
 h2.under{border-bottom:1px solid #e5e5e5;margin-bottom:25px}
-h3{font-size:26px;color:#000;line-height:1.2em;letter-spacing:-0px;padding-bottom:16px;font-weight:400;font-style:normal}
+h3{font-size:30px;color:#000;line-height:1.2em;letter-spacing:-0px;padding-bottom:16px;font-weight:400;font-style:normal}
 h3 span{display:block;margin-top:-7px}
 * + html h3 span{margin-top:-25px}
-h3 .dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(/media/images/dropcap1.gif) 0 0 no-repeat;font-size:38px;color:#fff;text-align:center;font-weight:700;line-height:1.2em;padding-top:6px}
+h3 .dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(/media/images/dropcap1.gif) 0 0 no-repeat;font-size:30px;color:#fff;text-align:center;font-weight:700;line-height:1.2em;padding-top:6px}
 h4{font-size:26px;line-height:1.2em;color:#fff;font-weight:400;padding:43px 0 15px 0}
 h5{font-size:33px;color:#000;line-height:1.7em;padding:0 0 16px 0;font-weight:400;font-style:normal}
 h5 .dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(/media/images/dropcap1.gif) 0 0 no-repeat;color:#fff;text-align:center}
@@ -63,8 +63,8 @@ header{padding-top:34px;height:148px}
 #content2{padding-bottom:50px}
 .pad_left1{padding-left:50px}
 .pad_left2{padding-left:40px}
-.pad_bot1{padding-bottom:8px;font-size: 20px; text-align: justify;}
-.pad_bot2{padding-bottom:40px}
+.pad_bot1{padding-bottom:8px;font-size: 14px; text-align: justify;}
+.pad_bot2{padding: 20px 20px; display: inline-block; }
 .marg_right1{margin-right:20px}
 .link1{color:#60b000;font-style:normal}
 .testimonials{width:100%;position:relative;z-index:1;height:210px;overflow:hidden}
@@ -120,3 +120,5 @@ footer a:hover{}
 #newsletter .wrapper{min-height:40px}
 #newsletter a{float:right;width:90px;height:32px;background:#fff;line-height:32px;color:#000;font-weight:bold;text-align:center;font-style:normal;text-decoration:none}
 #newsletter a:hover{background:#60b000;color:#fff}
+.boton{margin-left: 10px;float: right;width: 150px;font-style: normal;font-weight: bold;color: white;height: 42px;line-height: 40px;text-decoration: none;background: #60B000;text-align: center;}
+.boton:hover{background: #080808;}

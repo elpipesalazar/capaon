@@ -29,8 +29,8 @@
 </section>
 <section class="col2 pad_left1">
 	<h2 class="under">Contacto</h2>
-	{% if datos %}
-		{% for d in datos %}
+	{% if contacto %}
+		{% for d in contacto %}
 	<div id="address"><span>Pais:<br>
 			Ciudad:<br>
 			Telefono:<br>
@@ -45,3 +45,18 @@
 	{% endif %}
 </section>
 {% endblock %}
+{% block datos %}
+	{% if contacto %}
+		{% for c in contacto  %}
+			<h4>{{c.Empresa}}</h4>
+			<ul class="address">
+				<li><span>País:</span>{{ c.Pais }}</li>
+				<li><span>Ciudad:</span>{{ c.Ciudad }}</li>
+				<li><span>Teléfono:</span>{{ c.Telefono }}</li>
+				<li><span>Email:</span><a href="mailto:">{{ c.Email }}</a></li>
+			</ul>
+		{% endfor %}
+	{% else %}
+		<h4>datos no definidos</h4>
+	{% endif %}
+{% endblock datos %}

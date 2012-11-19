@@ -1,4 +1,3 @@
-# Django settings for capaon project.
 import os
 
 DEBUG = True
