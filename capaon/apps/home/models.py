@@ -45,7 +45,7 @@ class Objetivo(models.Model):
 
 
 class Horario(models.Model):
-	Dia = models.CharField(choices = dias)
+	Dia = models.CharField(max_length=40, choices = dias)
 	De = models.IntegerField()
 	Hasta = models.IntegerField()
 
@@ -66,20 +66,20 @@ class FasesModulo(models.Model):
 
 class Modulos(models.Model):
 	Numero = models.IntegerField()
-	Nombre = models.CharField()
+	Nombre = models.CharField(max_length=50)
 	Duracion = models.IntegerField()
 	Facilitador = models.ManyToManyField(Facilitador)
 	Fases = models.ManyToManyField(FasesModulo)
 
 
 class EstadosCurso(models.Model):
-	tipo = models.CharField(choices= EstadoCurso)
+	tipo = models.CharField(choices= EstadoCurso, max_length=50)
 
 
 class Cliente(models.Model):
-	Tipo = models.CharField(choices=cliente)
+	Tipo = models.CharField(choices=cliente, max_length=30)
 	#Curso = models.ManyToManyField(Curso)
-	Estado = models.CharField(choices = estadoCliente)
+	Estado = models.CharField(choices = estadoCliente, max_length=50)
 	Potencial = models.BooleanField()
 	
 class Curso(models.Model):
@@ -111,14 +111,14 @@ class Empresa(models.Model):
 		return self.Nombre
 
 
-class Indivudual(models.Model):
+class Individual(models.Model):
 	Nombre = models.CharField(max_length=100)
 	Apellido = models.CharField(max_length=100)
 	Email = models.EmailField()
 	Cedula = models.CharField(max_length=100)
 	FechaNacimiento = models.DateField()
 	Direccion = models.CharField(max_length=100)
-	Pais = models.CharField(choices=pais)
+	Pais = models.CharField(choices=pais, max_length=50)
 	Telefono = models.CharField(max_length=100)
 	Celular = models.CharField(max_length=100)
 
