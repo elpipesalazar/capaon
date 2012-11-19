@@ -1,12 +1,11 @@
-
-.col1, .col2, .col3, .cols { float:left;}
+.col1, .col2, .col3, .cols , .colsP{ float:left;}
 
 .cols{ width:190px;}
 
 .col1{ width:670px;}
 .col3{ width:200px;}
 .col2{ width:220px;}
-
+.colsP{width: 270px;}
 
 /*======= index.html =======*/
 #page1 .body2{ background:url(../images/bg_slider.gif) bottom repeat-x}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block titulo %}{{ titulo }}{% endblock %}
+{% block clasem3 %}active{% endblock %}
+{% block cuerpo %}
+	{% if cursos %}
+		{% for c in cursos  %}
+		<section>
+			<div>
+				<h3><span class="dropcap">{{ forloop.counter }}</span>{{ c.Nombre }}</h3>
+				<figure><img src="/media/images/page4_img{{forloop.counter}}.jpg" alt=""></figure><br>
+				<p class="pad_bot1">{{ c.Generalidades}}</p>
+				<h3>Inscripciones Hasta</h3> <p class="pad_bot1"> 19 de Noviembre</p>
+				<a href="{{c.id}}" class="link1">Saber Más</a>
+			</div>
+		{% endfor %}				
+	{% endif %}	
+		
+{% endblock %}
+{% block datos %}
+	{% if contacto %}
+		{% for c in contacto  %}
+			<h4>{{c.Empresa}}</h4>
+			<ul class="address">
+				<li><span>País:</span>{{ c.Pais }}</li>
+				<li><span>Ciudad:</span>{{ c.Ciudad }}</li>
+				<li><span>Teléfono:</span>{{ c.Telefono }}</li>
+				<li><span>Email:</span><a href="mailto:">{{ c.Email }}</a></li>
+			</ul>
+		{% endfor %}
+	{% else %}
+		<h4>datos no definidos</h4>
+	{% endif %}
+{% endblock datos %}

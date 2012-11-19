@@ -42,24 +42,30 @@ class Horario(models.Model):
 
 
 class Facilitador(models.Model):
-	Nombre = models.CharField(max_length=100)
+	Nombre = models.CharField(max_length=100, unique=True)
 	Descripcion = models.TextField(blank=True)
 
 	def __unicode__(self):
 		return self.Nombre
+	class Admin:
+		list_display = ('Nombre')
+		list_filter = ('Nombre')
+		ordering = ('-Nombre')
+		search_fields = ('Nombre')
 
-
-
-class Modulo(models.Model):
-	Numero = models.IntegerField()
-	Nombre = models.CharField(max_length=100)
-	Duracion = models.IntegerField()
-	Facilitador = models.ManyToManyField(Facilitador)
-	Contenido = models.TextField()
-
-	def __unicode__(self):
-		return self.Nombre
 	
+class Cliente(models.Model):
+	Estado = models.CharField(choices = estadoCliente, max_length=50)
+	Potencial = models.BooleanField()
+
+class Inscrito(models.Model):
+	cliente = models.ForeignKey(Cliente)
+	fechaInscripcion = models.DateTimeField(auto_now_add=True)
+
+class Matriculado(models.Model):
+	cliente = models.ForeignKey(Cliente)
+	fechaMatricula = models.DateTimeField(auto_now_add=True)
+
 class Curso(models.Model):
 	Nombre = models.CharField(max_length=100, unique=True)
 	Generalidades = models.TextField()
@@ -67,18 +73,38 @@ class Curso(models.Model):
 	Duracion = models.IntegerField(help_text="Horas")
 	Horario = models.ManyToManyField(Horario)
 	Metodologia = models.TextField()
-	Contenido = models.ManyToManyField(Modulo)
 	Estado = models.CharField(choices= EstadoCurso, max_length=50)
 	CupoMin = models.IntegerField()
 	CupoMax = models.IntegerField()
+	Inscritos = models.ManyToManyField(Inscrito, editable=False, blank=True)
+	Matriculados = models.ManyToManyField(Matriculado, editable=False, blank=True)
+
+	class Admin:
+		list_display = ('Nombre', 'Duracion', 'Estado')
+		list_filter = ('Duracion', 'Estado')
+		ordering = ('-Estado',)
+		search_fields = ('Nombre',)
 
 	def __unicode__(self):
 		return self.Nombre
 
+class Modulo(models.Model):
+	Numero = models.IntegerField()
+	Nombre = models.CharField(max_length=150, unique=True)
+	Duracion = models.IntegerField()
+	Facilitador = models.ForeignKey(Facilitador, blank=True)
+	Contenido = models.TextField()
+	Curso = models.ForeignKey(Curso)
 
-class Cliente(models.Model):
-	Estado = models.CharField(choices = estadoCliente, max_length=50)
-	Potencial = models.BooleanField()
+	class Admin:
+		list_display = ('Numero', 'Nombre', 'Facilitador')
+		list_filter = ('Nombre', 'Facilitador')
+		ordering = ('-Curso',)
+		search_fields = ('Nombre',)
+
+	def __unicode__(self):
+		return self.Nombre
+
 
 class Empresa(models.Model):	
 	RazonSocial = models.CharField(max_length=100)

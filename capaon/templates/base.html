@@ -26,7 +26,7 @@
 							<ul id="menu">
 								<li id="nav1" class="{% block clasem1%}{% endblock %}"><a href="/">Inicio<span>Bienvenido!</span></a></li>
 								<li id="nav2" class="{% block clasem2%}{% endblock %}"><a href="{% url vista_MisionVision %}">Vision, Mision<span>Nosotros</span></a></li>
-								<li id="nav4" class="{% block clasem3%}{% endblock %}"><a href="{% url vista_Cursos %}">Cursos<span>Capacitación</span></a></li>
+								<li id="nav4" class="{% block clasem3%}{% endblock %}"><a href="{% url vista_Cursos %}">Capacitación<span>Cursos</span></a></li>
 								<li id="nav5" class="{% block clasem4%}{% endblock %}"><a href="{% url vista_Contacto %}">Contáctanos<span>Nestras Direcciones</span></a></li>
 							</ul>
 						</nav>
@@ -66,13 +66,9 @@
 							</ul>
 						</section>
 						<section class="col3 pad_left2">
-							<h4>Dirección</h4>
-							<ul class="address">
-								<li><span>País:</span>Colombia</li>
-								<li><span>Ciudad:</span>Pereira</li>
-								<li><span>Teléfono:</span>8 800 154-45-67</li>
-								<li><span>Email:</span><a href="mailto:">admin@capaon.com</a></li>
-							</ul>
+							{% block datos %}
+								
+							{% endblock datos %}
 						</section>
 						<section class="col3 pad_left2">
 							<h4>Síguenos</h4>
