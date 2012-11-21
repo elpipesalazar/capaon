@@ -2,20 +2,43 @@
 {% block titulo %}{{ titulo }}{% endblock %}
 {% block clasem2 %}active{% endblock %}
 {% block cuerpo %}
+	<div class="tab-content" id="tab1">
 	{% if Mision %}
 		{% for n in Mision %}
-			<h2>{{ n.titulo }}</h2>
-			<p>{{ n.Descripcion }}</p>
+			<div class="pad_bot2">
+				<h5>{{ n.titulo }}</h5>
+				<figure class="left marg_right1"><img src="/media/images/page2_img1.jpg" alt=""></figure>
+				<p class="pad_bot1">{{ n.Contenido}}</p>
+			</div>
 		{% endfor %}
 	{% else %}
 		<p>Mision No definida aun</p>
 	{% endif %}
 	{% if Vision %}
 		{% for m in Vision %}
-			<h2>{{ m.titulo }}</h2>
-			<p>{{ m.Descripcion }}</p>
+			<div class="pad_bot2">
+				<h5>{{ m.titulo }}</h5>
+				<figure class="left marg_right1"><img src="/media/images/page2_img2.jpg" alt=""></figure>
+				<p class="pad_bot1">{{ m.Contenido }}</p>
+			</div>
 		{% endfor %}
 	{% else %}
 		<p>Vision No definida aun</p>
 	{% endif %}
+	</div>
 {% endblock %}
+{% block datos %}
+	{% if contacto %}
+		{% for c in contacto  %}
+			<h4>{{c.Empresa}}</h4>
+			<ul class="address">
+				<li><span>País:</span>{{ c.Pais }}</li>
+				<li><span>Ciudad:</span>{{ c.Ciudad }}</li>
+				<li><span>Teléfono:</span>{{ c.Telefono }}</li>
+				<li><span>Email:</span><a href="mailto:">{{ c.Email }}</a></li>
+			</ul>
+		{% endfor %}
+	{% else %}
+		<h4>datos no definidos</h4>
+	{% endif %}
+{% endblock datos %}

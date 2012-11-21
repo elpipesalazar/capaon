@@ -1,4 +1,5 @@
 import os
+import django_extensions
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -122,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'capaon.apps.home',
+    'django_extensions',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
