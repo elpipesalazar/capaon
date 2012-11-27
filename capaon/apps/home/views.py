@@ -2,8 +2,12 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from capaon.apps.home.models import Contenido, Contacto, Curso, Modulo
+<<<<<<< HEAD
 from capaon.apps.home.forms import EmpresaForm, ContactForm
 from django.core.mail import send_mail
+=======
+from capaon.apps.home.forms import EmpresaForm
+>>>>>>> 2bf9751ccd57ebab02aace68288197b0532a6702
 
 #vista del index (pagina incial)
 def index_view(request):
@@ -33,6 +37,7 @@ def mv_view(request):
 #Vista de la seccion Contactenos
 def contact_view(request):
 	contacto = Contacto.objects.filter(Empresa = 'CI')
+<<<<<<< HEAD
 	if request.method =='POST':
 		formulario = ContactForm(request.POST)
 		if formulario.is_valid():
@@ -46,6 +51,8 @@ def contact_view(request):
 			return HttpResponseRedirect('/')
 	else:
 		formulario = ContactForm()
+=======
+>>>>>>> 2bf9751ccd57ebab02aace68288197b0532a6702
 	return render_to_response('contact.html',locals(),context_instance = RequestContext(request))
 
 #Vista de la Seccion de Capacitacion

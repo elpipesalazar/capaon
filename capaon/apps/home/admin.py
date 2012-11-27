@@ -1,5 +1,6 @@
 from django.contrib import admin
 from capaon.apps.home.models import Contenido, Contacto, Horario, Facilitador, Modulo, Curso, Empresa, Individual, Inscrito, Matriculado
+<<<<<<< HEAD
 
 class AdminFacilitador(admin.ModelAdmin):
 	list_filter = ('Nombre',)
@@ -26,6 +27,8 @@ class AdminModulo(admin.ModelAdmin):
 class AdminHorario(admin.ModelAdmin):
 	list_display = ('Dia','De','Hasta')
 
+=======
+>>>>>>> 2bf9751ccd57ebab02aace68288197b0532a6702
 
 admin.site.register(Contenido)
 admin.site.register(Contacto)
