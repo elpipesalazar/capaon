@@ -2,7 +2,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from capaon.apps.home.models import Contenido, Contacto, Curso, Modulo
-from capaon.apps.home.forms import EmpresaForm
+from capaon.apps.home.forms import EmpresaForm, ContactForm
+
 
 #vista del index (pagina incial)
 def index_view(request):
@@ -32,6 +33,19 @@ def mv_view(request):
 #Vista de la seccion Contactenos
 def contact_view(request):
 	contacto = Contacto.objects.filter(Empresa = 'CI')
+	if request.method =='POST':
+		formulario = ContactForm(request.POST)
+		if formulario.is_valid():
+			titulo = "Mensaje Enviado desde CAPAON"
+			contenido = formulario.cleaned_data['Mensaje'] + "\n"
+			remitente = formulario.cleaned_data['Email']
+			contenido += 'Comunicarse a: ' + remitente + "\n"
+			contenido += 'Nombre de Remitente: ' + formulario.cleaned_data['Nombre'] + "\n"
+			contenido += 'Ciudad: ' + formulario.cleaned_data['Ciudad']
+			send_mail(titulo, contenido, remitente, ['elpipesalazar@hotmail.com'], fail_silently=False)	
+			return HttpResponseRedirect('/')
+	else:
+		formulario = ContactForm()
 	return render_to_response('contact.html',locals(),context_instance = RequestContext(request))
 
 #Vista de la Seccion de Capacitacion

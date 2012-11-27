@@ -32,6 +32,17 @@
 						</nav>
 						</div>
 					</header>
+					<section id="login">
+						<label for="Usuario">Usuario:
+							<input type="text">
+						</label>
+						<label for="pasword">Contraseña:
+							<input type="password" name="password">
+						</label>
+						<a href="" class="botonLogin" >Iniciar sesion</a>
+						<strong style="margin-left:35px">No estas registrado aún?</strong>
+						<a href="" class="botonLogin">Registrate</a>
+					</section>
 				</div>
 				</div>
 			</div>
@@ -84,7 +95,7 @@
 							<form id="newsletter" method="post">
 								<div>
 									<div class="wrapper">
-										<input class="input" type="text" value="criterio de busqueda"  onblur="if(this.value=='') this.value='Type Your Email Here'" onfocus="if(this.value =='Type Your Email Here' ) this.value=''" >
+										<input class="input" type="text" placeholder="criterio de busqueda">
 									</div>
 									<a href="#" class="button" onclick="document.getElementById('newsletter').submit()">Buscar</a>
 								</div>

@@ -4,27 +4,40 @@
 {% block cuerpo %}
 <section class="col1">
 	<h2 class="under">Formulario Contacto</h2>
-	<form id="ContactForm" method="post">
-	<div>
-		<div  class="wrapper">
-			<span>Tu Nombre:</span>
-			<input type="text" class="input" >
-		</div>
-		<div  class="wrapper">
-			<span>Tu Ciudad:</span>
-			<input type="text" class="input" >
-		</div>
-		<div  class="wrapper">
-			<span>Tu E-mail:</span>
-			<input type="text" class="input" >
-		</div>
-		<div  class="textarea_box">
-			<span>Tu Mensaje:</span>
-			<textarea name="textarea" cols="1" rows="1"></textarea>
-		</div>
-		<a href="" onClick="document.getElementById('ContactForm').submit()">Enviar</a>
-		<a href="" onClick="document.getElementById('ContactForm').reset()">Limpiar</a>
-	</div>
+	{% if formulario %}
+		<form id="ContactForm" method="post" action="">
+		{% csrf_token %}
+		<div>
+			<div  class="wrapper">
+				<span>Tu Nombre:</span>
+				{% for error in formulario.Nombre.errors%}
+					<p class="error">{{error|escape}}</p>
+				{% endfor %}
+				{{ formulario.Nombre }}
+			</div>
+			<div  class="wrapper">
+				<span>Tu Ciudad:</span>
+				{% for error in formulario.Ciudad.errors%}
+					<p class="error">{{error|escape}}</p>
+				{% endfor %}
+				{{ formulario.Ciudad }}
+			</div>
+			<div  class="wrapper">
+				<span>Tu E-mail:</span>
+				{{ formulario.Email}}
+				{% for error in formulario.Email.errors%}
+					<p class="error">{{error|escape}}</p>
+				{% endfor %}
+			</div>
+			<div  class="textarea_box">
+				<span>Tu Mensaje:</span>
+				{{ formulario.Mensaje }}
+			</div>
+			<input type="submit" value="Enviar" class="submit">
+			<a href="" onClick="document.getElementById('ContactForm').reset()">Limpiar</a>
+		</div>	
+	{% endif %}
+	
 </form>
 </section>
 <section class="col2 pad_left1">

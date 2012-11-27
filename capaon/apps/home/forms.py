@@ -15,3 +15,9 @@ class EmpresaForm(forms.Form):
 	Pais = forms.CharField(widget = forms.Select(choices=pais))
 	Direccion = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
 	Email = forms.EmailField(required=True)
+
+class ContactForm(forms.Form):
+	Nombre = forms.CharField(widget = forms.TextInput(attrs = {'class':'input', 'required':'required'}))
+	Ciudad = forms.CharField(widget = forms.TextInput(attrs = {'class':'input','required':'required'}))
+	Email = forms.EmailField(required=True)
+	Mensaje = forms.CharField(widget= forms.Textarea(attrs={'required':'required'}))

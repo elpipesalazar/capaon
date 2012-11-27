@@ -25,7 +25,11 @@ h2.under{border-bottom:1px solid #e5e5e5;margin-bottom:25px}
 h3{font-size:30px;color:#000;line-height:1.2em;letter-spacing:-0px;padding-bottom:16px;font-weight:400;font-style:normal}
 h3 span{display:block;margin-top:-7px}
 * + html h3 span{margin-top:-25px}
+<<<<<<< HEAD
+.dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(/media/images/dropcap1.gif) 0 0 no-repeat;font-size:30px;color:#fff;text-align:center;font-weight:700;line-height:1.2em;padding-top:6px}
+=======
 h3 .dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(/media/images/dropcap1.gif) 0 0 no-repeat;font-size:30px;color:#fff;text-align:center;font-weight:700;line-height:1.2em;padding-top:6px}
+>>>>>>> 2bf9751ccd57ebab02aace68288197b0532a6702
 h4{font-size:26px;line-height:1.2em;color:#fff;font-weight:400;padding:43px 0 15px 0}
 h5{font-size:33px;color:#000;line-height:1.7em;padding:0 0 16px 0;font-weight:400;font-style:normal}
 h5 .dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(/media/images/dropcap1.gif) 0 0 no-repeat;color:#fff;text-align:center}
@@ -110,9 +114,11 @@ footer a:hover{}
 #ContactForm .textarea_box{min-height:275px;width:100%;overflow:hidden;padding-bottom:6px}
 #ContactForm {}
 #ContactForm {}
+#ContactForm .submit{margin-left:10px;float:right;width:62px;font-style:normal;font-weight:bold;color:#fff;height:32px;line-height:25px;text-decoration:none;background:#60b000;text-align:center; cursor:pointer;}
+#ContactForm .submit:hover{background:#080808}
 #ContactForm a{margin-left:10px;float:right;width:62px;font-style:normal;font-weight:bold;color:#fff;height:32px;line-height:32px;text-decoration:none;background:#60b000;text-align:center}
 #ContactForm a:hover{background:#080808}
-#ContactForm .input {width:269px;height:18px;border:1px solid #e5e5e5;background:#fff;padding:3px 5px;color:#696968;font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;font-style:italic;margin:0}
+#ContactForm input {width:269px;height:18px;border:1px solid #e5e5e5;background:#fff;padding:3px 5px;color:#696968;font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;font-style:italic;margin:0}
 #ContactForm textarea {overflow:auto;width:549px;height:258px;border:1px solid #e5e5e5;background:#fff;padding:3px 5px;color:#696968;font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;font-style:italic;margin:0}
 #newsletter{}
 #newsletter .input{background:#fff;padding:6px 18px;width:184px;height:18px;font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;font-style:inherit;color:#b4b4b4;margin:0}
@@ -121,4 +127,11 @@ footer a:hover{}
 #newsletter a{float:right;width:90px;height:32px;background:#fff;line-height:32px;color:#000;font-weight:bold;text-align:center;font-style:normal;text-decoration:none}
 #newsletter a:hover{background:#60b000;color:#fff}
 .boton{margin-left: 10px;float: right;width: 150px;font-style: normal;font-weight: bold;color: white;height: 42px;line-height: 40px;text-decoration: none;background: #60B000;text-align: center;}
+<<<<<<< HEAD
+.botonLogin{margin-left: 10px;display: inline-block; width: 100px;font-style: normal;font-weight: bold;color: white;height: 30px;line-height: 30px;text-decoration: none;background: #60B000;text-align: center;}
 .boton:hover{background: #080808;}
+.error{color:red;}
+#login{padding: 30px}
+=======
+.boton:hover{background: #080808;}
+>>>>>>> 2bf9751ccd57ebab02aace68288197b0532a6702
