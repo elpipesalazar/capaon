@@ -1,5 +1,6 @@
 import os
-import django_extensions
+import south
+#import django_extensions
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -123,7 +124,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'capaon.apps.home',
-    'django_extensions',
+    'south',
+ #   'django_extensions',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -156,3 +158,9 @@ LOGGING = {
         },
     }
 }
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'elpipesalazar@gmail.com'
+EMAIL_HOST_PASSWORD = 'elpipe10F'
+EMAIL_PORT = 587

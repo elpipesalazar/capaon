@@ -52,11 +52,6 @@ class Facilitador(models.Model):
 
 	def __unicode__(self):
 		return self.Nombre
-	class Admin:
-		list_display = ('Nombre')
-		list_filter = ('Nombre')
-		ordering = ('-Nombre')
-		search_fields = ('Nombre')
 
 
 # Este es el modelo inicial de cliente (Todavia es suceptible a modificaciones)
@@ -82,7 +77,7 @@ class Matriculado(models.Model):
 
 # Modelo del curso
 class Curso(models.Model):
-	Nombre = models.CharField(max_length=100, unique=True, help_text='Nombre de Curso')
+	Nombre = models.CharField(max_length=100, unique=True, help_text='Nombre de Curso', null=False)
 	Generalidades = models.TextField()
 	Objetivos = models.TextField(help_text='Escriba cada objetivo separado por un salto de linea, si es subindice, agregue un guion')
 	Duracion = models.IntegerField(help_text="Horas. Ej: 12")
@@ -98,12 +93,6 @@ class Curso(models.Model):
 	FechaInicio = models.DateField(help_text='Fecha de Inicio de curso')
 	FechaFinal = models.DateField(help_text='Fecha de Finalizacion de curso')
 
-	class Admin:
-		list_display = ('Nombre', 'Duracion', 'Estado')
-		list_filter = ('Duracion', 'Estado')
-		ordering = ('-Estado',)
-		search_fields = ('Nombre',)
-
 	def __unicode__(self):
 		return self.Nombre
 
@@ -114,12 +103,6 @@ class Modulo(models.Model):
 	Facilitador = models.ForeignKey(Facilitador,null=True, help_text='Escoja un facilitador')
 	Contenido = models.TextField(help_text='Ingrese el contenido separando cada apartado con un salto de linea')
 	Curso = models.ForeignKey(Curso, help_text='Escoje el curso al cual pertenece este modulo')
-
-	class Admin:
-		list_display = ('Numero', 'Nombre', 'Facilitador')
-		list_filter = ('Nombre', 'Facilitador')
-		ordering = ('-Curso',)
-		search_fields = ('Nombre',)
 
 	def __unicode__(self):
 		return self.Nombre
