@@ -48,11 +48,7 @@ class Horario(models.Model):
 # Modelo para especificar el nombre y la descripcion del Facilitador de un curso
 class Facilitador(models.Model):
 	Nombre = models.CharField(max_length=100, unique=True)
-<<<<<<< HEAD
 	Descripcion = models.TextField(blank=True, help_text='Describa al Facilitador')
-=======
-	Descripcion = models.TextField(blank=True)
->>>>>>> 2bf9751ccd57ebab02aace68288197b0532a6702
 
 	def __unicode__(self):
 		return self.Nombre
@@ -67,7 +63,7 @@ class Cliente(models.Model):
 	Estado = models.CharField(choices = estadoCliente, max_length=50)
 	Potencial = models.BooleanField()
 
-<<<<<<< HEAD
+
 # Este es el modelo inicial de cliente (Todavia es suceptible a modificaciones)
 class Cliente(models.Model):
 	Estado = models.CharField(choices = estadoCliente, max_length=50)
@@ -89,17 +85,6 @@ class Matriculado(models.Model):
 
 
 
-# Modelo del curso
-=======
-class Inscrito(models.Model):
-	cliente = models.ForeignKey(Cliente)
-	fechaInscripcion = models.DateTimeField(auto_now_add=True)
-
-class Matriculado(models.Model):
-	cliente = models.ForeignKey(Cliente)
-	fechaMatricula = models.DateTimeField(auto_now_add=True)
-
->>>>>>> 2bf9751ccd57ebab02aace68288197b0532a6702
 class Curso(models.Model):
 	Nombre = models.CharField(max_length=100, unique=True, help_text='Nombre de Curso', null=False)
 	Generalidades = models.TextField()
@@ -108,7 +93,6 @@ class Curso(models.Model):
 	Horario = models.ManyToManyField(Horario, help_text='Asigne uno o varios horarios')
 	Metodologia = models.TextField()
 	Estado = models.CharField(choices= EstadoCurso, max_length=50)
-<<<<<<< HEAD
 	CupoMin = models.IntegerField(default=20)
 	CupoMax = models.IntegerField(default=30)
 	Inscritos = models.ManyToManyField(Inscrito, editable=False, blank=True)
@@ -117,24 +101,12 @@ class Curso(models.Model):
 	FinalInscripciones = models.DateField(help_text='Fecha Final para Inscripciones (La fecha de Inicio empieza al crear este curso)')
 	FechaInicio = models.DateField(help_text='Fecha de Inicio de curso')
 	FechaFinal = models.DateField(help_text='Fecha de Finalizacion de curso')
-=======
-	CupoMin = models.IntegerField()
-	CupoMax = models.IntegerField()
-	Inscritos = models.ManyToManyField(Inscrito, editable=False, blank=True)
-	Matriculados = models.ManyToManyField(Matriculado, editable=False, blank=True)
-
-	class Admin:
-		list_display = ('Nombre', 'Duracion', 'Estado')
-		list_filter = ('Duracion', 'Estado')
-		ordering = ('-Estado',)
-		search_fields = ('Nombre',)
->>>>>>> 2bf9751ccd57ebab02aace68288197b0532a6702
 
 	def __unicode__(self):
 		return self.Nombre
 
+
 class Modulo(models.Model):
-<<<<<<< HEAD
 	Numero = models.IntegerField(help_text='Numero del modulo del curso')
 	Nombre = models.CharField(max_length=150, unique=True, help_text='Nombre del modulo')
 	Duracion = models.IntegerField(help_text='Ingrese un entero con el valor de las horas de duracion ej: 25')
@@ -148,24 +120,6 @@ class Modulo(models.Model):
 
 # Los modelos de Usuario Individual y Empresarial son iniciales y no se han optimizado
 # Esta tarea se hara en el segundo release
-=======
-	Numero = models.IntegerField()
-	Nombre = models.CharField(max_length=150, unique=True)
-	Duracion = models.IntegerField()
-	Facilitador = models.ForeignKey(Facilitador, blank=True)
-	Contenido = models.TextField()
-	Curso = models.ForeignKey(Curso)
-
-	class Admin:
-		list_display = ('Numero', 'Nombre', 'Facilitador')
-		list_filter = ('Nombre', 'Facilitador')
-		ordering = ('-Curso',)
-		search_fields = ('Nombre',)
-
-	def __unicode__(self):
-		return self.Nombre
-
->>>>>>> 2bf9751ccd57ebab02aace68288197b0532a6702
 
 class Empresa(models.Model):	
 	RazonSocial = models.CharField(max_length=100)
