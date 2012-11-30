@@ -1,8 +1,8 @@
 from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.template import RequestContext 
 from django.http import HttpResponseRedirect
 from capaon.apps.home.models import Contenido, Contacto, Curso, Modulo
-from capaon.apps.home.forms import EmpresaForm, ContactForm
+from capaon.apps.home.forms import EmpresaForm, IndividualForm, ContactForm
 
 
 #vista del index (pagina incial)
@@ -16,12 +16,13 @@ def index_view(request):
 #vista de Registro de Usuario
 def register_view(request):
 	Empresaform = EmpresaForm()
+	Individualform = IndividualForm()
 	contacto = Contacto.objects.all()
 	if request.method == 'POST':
 		datos = request.POST.copy()
 		errores = Empresaform.get_validation_errors(datos)
-	ctx = {"EmpresaForm": Empresaform}
-	return render_to_response('register.html', ctx, context_instance = RequestContext(request))
+		return HttpResponseRedirect('/')
+	return render_to_response('register.html', locals(), context_instance = RequestContext(request))
 
 #vista de mision y vision
 def mv_view(request):

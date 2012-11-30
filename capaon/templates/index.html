@@ -7,11 +7,7 @@
 		{% if cursos %}
 			{% for c in cursos %}
 				<section class="cols">
-<<<<<<< HEAD
 					<h6><span class="dropcap">{{ forloop.counter }}</span><span>{{c.Nombre}}</span></h6>
-=======
-					<h3><span class="dropcap">{{ forloop.counter }}</span>Curso<span>{{c.Nombre}}</span></h3>
->>>>>>> 2bf9751ccd57ebab02aace68288197b0532a6702
 					<p class="pad_bot1">{{ c.Generalidades|truncatewords:"12"}}</p>
 					<a href="capacitacion/{{c.id}}" class="link1">Ver mas...</a>
 				</section>

@@ -25,11 +25,9 @@ h2.under{border-bottom:1px solid #e5e5e5;margin-bottom:25px}
 h3{font-size:30px;color:#000;line-height:1.2em;letter-spacing:-0px;padding-bottom:16px;font-weight:400;font-style:normal}
 h3 span{display:block;margin-top:-7px}
 * + html h3 span{margin-top:-25px}
-<<<<<<< HEAD
 .dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(/media/images/dropcap1.gif) 0 0 no-repeat;font-size:30px;color:#fff;text-align:center;font-weight:700;line-height:1.2em;padding-top:6px}
 =======
 h3 .dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(/media/images/dropcap1.gif) 0 0 no-repeat;font-size:30px;color:#fff;text-align:center;font-weight:700;line-height:1.2em;padding-top:6px}
->>>>>>> 2bf9751ccd57ebab02aace68288197b0532a6702
 h4{font-size:26px;line-height:1.2em;color:#fff;font-weight:400;padding:43px 0 15px 0}
 h5{font-size:33px;color:#000;line-height:1.7em;padding:0 0 16px 0;font-weight:400;font-style:normal}
 h5 .dropcap{float:left;width:56px;height:56px;margin-top:0px;margin-right:10px;background:url(/media/images/dropcap1.gif) 0 0 no-repeat;color:#fff;text-align:center}
@@ -127,11 +125,113 @@ footer a:hover{}
 #newsletter a{float:right;width:90px;height:32px;background:#fff;line-height:32px;color:#000;font-weight:bold;text-align:center;font-style:normal;text-decoration:none}
 #newsletter a:hover{background:#60b000;color:#fff}
 .boton{margin-left: 10px;float: right;width: 150px;font-style: normal;font-weight: bold;color: white;height: 42px;line-height: 40px;text-decoration: none;background: #60B000;text-align: center;}
-<<<<<<< HEAD
-.botonLogin{margin-left: 10px;display: inline-block; width: 100px;font-style: normal;font-weight: bold;color: white;height: 30px;line-height: 30px;text-decoration: none;background: #60B000;text-align: center;}
-.boton:hover{background: #080808;}
+.botonLogin{margin-left: 15px;display: inline-block; width: 100px;font-style: normal;font-weight: bold;color: white;height: 30px;line-height: 30px;text-decoration: none;background: #60B000;text-align: center;}
+.boton:hover,.botonLogin:hover{background: #080808;}
 .error{color:red;}
 #login{padding: 30px}
-=======
 .boton:hover{background: #080808;}
->>>>>>> 2bf9751ccd57ebab02aace68288197b0532a6702
+.camposesion{
+	width: 130px;
+	line-height: 20px;
+	padding: 2px 5px;
+	font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;
+  	border: 1px solid silver;
+	background: -webkit-linear-gradient(#eee, #fff);
+	background: -moz-linear-gradient(#eee, #fff);
+	background: -o-linear-gradient(#eee, #fff);
+	background: linear-gradient(#eee, #fff);
+	transition: all 0.3s ease-out;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	padding: 5px;
+	color: #555;
+}
+.camposesion:focus{color:#696969; outline: none;background-position: 0 -1.7em;}
+
+/* Boton para escoger entre empresa o individual */
+.usuarioregistro {
+	background-color:#3bb3e0;
+	background-image: linear-gradient(bottom, #60B000 0%, grey 100%);
+	background-image: -o-linear-gradient(bottom, #60B000 0%, grey 100%);
+	background-image: -moz-linear-gradient(bottom, #60B000 0%, grey 100%);
+	background-image: -webkit-linear-gradient(bottom, #60B000 0%, grey 100%);
+	background-image: -ms-linear-gradient(bottom, #60B000 0%, grey 100%);
+	background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, #60B000),
+	color-stop(1, #60B000)
+	);
+	border: solid 1px white;
+	border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-o-border-radius: 5px;
+	box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff;
+		-webkit-box-shadow: inset 0px 1px 0px grey, 0px 1px 0px #fff;
+		-moz-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff;
+	color:#fff;
+	cursor: pointer;
+	display: inline-block;
+	font-family: 'Open Sans', sans-serif;
+	font-size:12px;
+	margin: 0 10px;
+	padding:10px;
+	text-decoration:none;
+	text-align: center;
+	
+}
+
+.usuarioregistro::before {
+	background-color:#fff;
+	content:"";
+	display:block;
+	position:absolute;
+	width:100%;
+	height:100%;
+	padding:8px;
+	left:-8px;
+	top:-8px;
+	z-index:-1;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0px 1px 1px #CCC, 0px 1px 0px #fff;
+	-moz-box-shadow: inset 0px 1px 1px #CCC, 0px 1px 0px #fff;
+	-o-box-shadow: inset 0px 1px 1px #CCC, 0px 1px 0px #fff;
+	box-shadow: inset 0px 1px 1px #CCC, 0px 1px 0px #fff;
+}
+
+.usuarioregistro:active {
+	padding-bottom:9px;
+	padding-left:10px;
+	padding-right:10px;
+	padding-top:11px;
+	top:1px;
+	background-image: linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+	background-image: -o-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+	background-image: -moz-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+	background-image: -ms-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+	background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, black),
+	color-stop(1, grey)
+	);
+}
+
+.contRegistro{
+	display: inline-block;
+	width: 100%;
+}
+
+.contRegistro div{
+	margin: 0 auto;
+	text-align: center;
+	width: 35%;
+}

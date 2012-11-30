@@ -1,6 +1,8 @@
 import os
 #import south
-#import django_extensions
+import django_extensions
+#import haystack
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -17,10 +19,10 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'capaon',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'sistemas10',                  # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'capaon.db',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -123,12 +125,17 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+ #   'haystack',
     'capaon.apps.home',
  #   'south',
- #   'django_extensions',
+    'django_extensions',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+#HAYSTACK_SITECONF = 'capaon.search_sites'
+#HAYSTACK_SEARCH_ENGINE = 'whoosh'
+#WHOOSH_INDEX = '/temp/whooshindex/capaon' 
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

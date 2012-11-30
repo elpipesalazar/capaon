@@ -1,12 +1,41 @@
 {% extends "base.html" %}
+
+{% block scripts %}
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$("#individual").click(function(){
+				$("#contEmpresarial").slideUp();
+				$("#contIndividual").slideDown();
+			});
+			$("#empresarial").click(function(){
+				$("#contIndividual").slideUp();
+				$("#contEmpresarial").slideDown();
+			});
+		});
+		
+	</script>	
+{% endblock scripts %}
 {% block titulo %}Registro de Cliente Empresa {% endblock %}
 {% block cuerpo%}
-	<form action="">
-		<fieldset>
-			<legend>Registro de Usuario Empresarial</legend>
-			{% csrf_token %}
-			{{ EmpresaForm.as_p}}
-			<input type="submit" value="Registrarse">
-		</fieldset>
-	</form>
+	<section class="contRegistro">
+		<div>
+			<h3>Que tipo de usuario eres?</h3>
+			<a class="usuarioregistro" id="individual">Individual</a>
+        	<a class="usuarioregistro" id="empresarial">Empresarial</a>	
+		</div>
+		<section id="contIndividual" style="display:none">
+			<h2>Usuario Individual</h2>
+			<form action="">
+				{% csrf_token %}
+				{{ Individualform.as_p }}
+			</form>
+		</section>
+		<section id="contEmpresarial" style="display:none">
+			<h2>Usuario Empresarial</h2>
+			<form action="">
+				{% csrf_token %}
+				{{ Empresaform.as_p }}
+			</form>
+		</section>
+	</section>
 {% endblock %}

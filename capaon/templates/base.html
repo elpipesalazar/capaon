@@ -4,10 +4,12 @@
 		<link rel="stylesheet" href="/media/css/reset.css" type="text/css" media="all">
 		<link rel="stylesheet" href="/media/css/layout.css" type="text/css" media="all">
 		<link rel="stylesheet" href="/media/css/style.css" type="text/css" media="all">
+		<script type="text/javascript" src="/media/js/jquery-1.8.3.js"></script>
 		<script type="text/javascript" src="/media/js/cufon-yui.js"></script>
 		<script type="text/javascript" src="/media/js/cufon-replace.js"></script>
 		<script type="text/javascript" src="/media/js/Swis721_Cn_BT_400.font.js"></script>
 		<script type="text/javascript" src="/media/js/Swis721_Cn_BT_700.font.js"></script>
+		{% block scripts %} 	{% endblock scripts %}
 		<title>{% block titulo %}{% endblock %}</title>
 		<meta charset="UTF-8">
 		{% block estiloIn %}{% endblock %}
@@ -27,21 +29,21 @@
 								<li id="nav1" class="{% block clasem1%}{% endblock %}"><a href="/">Inicio<span>Bienvenido!</span></a></li>
 								<li id="nav2" class="{% block clasem2%}{% endblock %}"><a href="{% url vista_MisionVision %}">Vision, Mision<span>Nosotros</span></a></li>
 								<li id="nav4" class="{% block clasem3%}{% endblock %}"><a href="{% url vista_Cursos %}">Capacitación<span>Cursos</span></a></li>
-								<li id="nav5" class="{% block clasem4%}{% endblock %}"><a href="{% url vista_Contacto %}">Contáctanos<span>Nestras Direcciones</span></a></li>
+								<li id="nav5" class="{% block clasem4%}{% endblock %}"><a href="{% url vista_Contacto %}">Contáctanos<span>Nuestras Direcciones</span></a></li>
 							</ul>
 						</nav>
 						</div>
 					</header>
 					<section id="login">
 						<label for="Usuario">Usuario:
-							<input type="text">
+							<input type="text" class="camposesion" >
 						</label>
-						<label for="pasword">Contraseña:
-							<input type="password" name="password">
+						<label for="pasword" >Contraseña:
+							<input type="password" name="password" class="camposesion" >
 						</label>
 						<a href="" class="botonLogin" >Iniciar sesion</a>
 						<strong style="margin-left:35px">No estas registrado aún?</strong>
-						<a href="" class="botonLogin">Registrate</a>
+						<a class="botonLogin" href="{% url vista_registro %}" >Registrate</a>
 					</section>
 				</div>
 				</div>

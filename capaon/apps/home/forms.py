@@ -9,12 +9,24 @@ pais = (('Colombia','colombia'),
 class EmpresaForm(forms.Form):
 	Nombre = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
 	NIT = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
+	Direccion = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
+	Actividad = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
 	Telefono = forms.CharField(widget = forms.TextInput(attrs = {'required':'required','type':'tel'}))
 	Fax = forms.DecimalField(widget = forms.TextInput(attrs = {'required':'required'}))
-	Actividad = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
-	Pais = forms.CharField(widget = forms.Select(choices=pais))
-	Direccion = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
 	Email = forms.EmailField(required=True)
+	Pais = forms.CharField(widget = forms.Select(choices=pais))
+
+class IndividualForm(forms.Form):
+	Nombre = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
+	Apellido = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
+	Cedula = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
+	Direccion = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
+	FechaNacimiento = forms.DateField(widget = forms.TextInput(attrs = {'required':'required','type':'date'}))
+	Telefono = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
+	Celular = forms.CharField(widget = forms.TextInput(attrs = {'required':'required'}))
+	Email = forms.EmailField(required=True)
+	Pais = forms.CharField(widget = forms.Select(choices=pais))
+
 
 class ContactForm(forms.Form):
 	Nombre = forms.CharField(widget = forms.TextInput(attrs = {'class':'input', 'required':'required'}))
