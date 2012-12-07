@@ -116,7 +116,8 @@ footer a:hover{}
 #ContactForm .submit:hover{background:#080808}
 #ContactForm a{margin-left:10px;float:right;width:62px;font-style:normal;font-weight:bold;color:#fff;height:32px;line-height:32px;text-decoration:none;background:#60b000;text-align:center}
 #ContactForm a:hover{background:#080808}
-#ContactForm input {width:269px;height:18px;border:1px solid #e5e5e5;background:#fff;padding:3px 5px;color:#696968;font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;font-style:italic;margin:0}
+form label{display: inline-block; width: 150px;}
+input {width:269px;height:18px;border:1px solid #e5e5e5;background:#fff;padding:3px 5px;color:#696968;font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;font-style:italic;margin:0}
 #ContactForm textarea {overflow:auto;width:549px;height:258px;border:1px solid #e5e5e5;background:#fff;padding:3px 5px;color:#696968;font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;font-style:italic;margin:0}
 #newsletter{}
 #newsletter .input{background:#fff;padding:6px 18px;width:184px;height:18px;font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;font-style:inherit;color:#b4b4b4;margin:0}
@@ -127,7 +128,7 @@ footer a:hover{}
 .boton{margin-left: 10px;float: right;width: 150px;font-style: normal;font-weight: bold;color: white;height: 42px;line-height: 40px;text-decoration: none;background: #60B000;text-align: center;}
 .botonLogin{margin-left: 15px;display: inline-block; width: 100px;font-style: normal;font-weight: bold;color: white;height: 30px;line-height: 30px;text-decoration: none;background: #60B000;text-align: center;}
 .boton:hover,.botonLogin:hover{background: #080808;}
-.error{color:red;}
+.errorlist{color:red;}
 #login{padding: 30px}
 .boton:hover{background: #080808;}
 .camposesion{

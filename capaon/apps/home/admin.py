@@ -1,5 +1,7 @@
 from django.contrib import admin
-from capaon.apps.home.models import Contenido, Contacto, Horario, Facilitador, Modulo, Curso, Empresa, Individual, Inscrito, Matriculado
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+from capaon.apps.home.models import Contenido, Contacto, Horario, Facilitador, Modulo, Curso, Empresa, Inscrito, Matriculado, PerfilCliente
 
 
 class AdminFacilitador(admin.ModelAdmin):
@@ -27,7 +29,17 @@ class AdminModulo(admin.ModelAdmin):
 class AdminHorario(admin.ModelAdmin):
 	list_display = ('Dia','De','Hasta')
 
+class ClienteProfileInline(admin.StackedInline):
+    model = PerfilCliente
+    can_delete = False
+    verbose_name_plural = 'Cliente'
 
+# Define a new User admin
+class UserAdmin(UserAdmin):
+    inlines = (ClienteProfileInline, )
+
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
 admin.site.register(Contenido)
 admin.site.register(Contacto)
 admin.site.register(Horario, AdminHorario)
@@ -35,6 +47,6 @@ admin.site.register(Facilitador, AdminFacilitador)
 admin.site.register(Modulo, AdminModulo)
 admin.site.register(Curso, AdminCurso)
 admin.site.register(Empresa)
-admin.site.register(Individual)
 admin.site.register(Inscrito)
 admin.site.register(Matriculado)
+admin.site.register(PerfilCliente)

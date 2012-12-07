@@ -6,7 +6,7 @@ import django_extensions
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
+AUTH_PROFILE_MODULE = 'home.PerfilCliente'
 # ruta del proyecto
 PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
@@ -19,10 +19,10 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'capaon.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'capaon',                      # Or path to database file if using sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': 'sistemas10',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'capaon.apps.home',
  #   'south',
     'django_extensions',
+    'crispy_forms',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

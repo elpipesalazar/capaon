@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block titulo %}Registro de Cliente Empresa {% endblock %}
+{% block cuerpo%}
+	<section class="contRegistro">
+		<section id="contEmpresarial">
+			<h2>Usuario Empresarial</h2>
+			<p>Todos los campor con un  <strong>*</strong>  son obligatorios</p>
+			<form action="." method=	"POST">
+				{% csrf_token %}
+				{% if usuario.getProfile() %}
+					<h6>Datos de la Empresa</h6>
+					{{ Emp}}
+				{% else %}
+					<h6>Datos del Representante legal</h6><br>
+						{{ usuario.as_p}}
+					<input type="submit" value="Registrarse" class="boton">
+				{% endif %}
+			</form>
+		</section>
+	</section>
+{% endblock %}

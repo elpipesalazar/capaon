@@ -1,8 +1,13 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext 
 from django.http import HttpResponseRedirect
-from capaon.apps.home.models import Contenido, Contacto, Curso, Modulo
-from capaon.apps.home.forms import EmpresaForm, IndividualForm, ContactForm
+from django.contrib.auth.forms import UserCreationForm 
+from capaon.apps.home.models import Contenido, Contacto, Curso, Modulo, Empresa
+from capaon.apps.home.forms import ClienteForm, ContactForm, EmpresaForm, UserForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
 
 #vista del index (pagina incial)
@@ -15,14 +20,26 @@ def index_view(request):
 
 #vista de Registro de Usuario
 def register_view(request):
-	Empresaform = EmpresaForm()
-	Individualform = IndividualForm()
+	contacto = Contacto.objects.all()
+	return render_to_response('register.html', locals(), context_instance = RequestContext(request))
+
+def registrar_empresa(request):
 	contacto = Contacto.objects.all()
 	if request.method == 'POST':
-		datos = request.POST.copy()
-		errores = Empresaform.get_validation_errors(datos)
-		return HttpResponseRedirect('/')
-	return render_to_response('register.html', locals(), context_instance = RequestContext(request))
+		usuario = UserForm(request.POST)
+		cliente = ClienteForm(request.POST)
+		empresa = EmpresaForm(request.POST)
+		if usuario.is_valid():
+			usuario.save()
+			return  HttpResponseRedirect('/')
+	else:		
+		usuario = UserForm()
+		empresa = EmpresaForm()
+		cliente = ClienteForm()
+		contacto = Contacto.objects.all()
+	return render_to_response('registroEmpresa.html', locals(), context_instance = RequestContext(request))
+
+
 
 #vista de mision y vision
 def mv_view(request):

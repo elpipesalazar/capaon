@@ -12,8 +12,7 @@
 				$("#contEmpresarial").slideDown();
 			});
 		});
-		
-	</script>	
+	</script>
 {% endblock scripts %}
 {% block titulo %}Registro de Cliente Empresa {% endblock %}
 {% block cuerpo%}
@@ -21,20 +20,30 @@
 		<div>
 			<h3>Que tipo de usuario eres?</h3>
 			<a class="usuarioregistro" id="individual">Individual</a>
-        	<a class="usuarioregistro" id="empresarial">Empresarial</a>	
+        	<a class="usuarioregistro" href="empresa" id="empresarial">Empresarial</a>	
 		</div>
 		<section id="contIndividual" style="display:none">
+			{% load crispy_forms_tags %}
 			<h2>Usuario Individual</h2>
 			<form action="">
 				{% csrf_token %}
-				{{ Individualform.as_p }}
+				{{ Individualform.as_p}}
+				<p><label for="password2">Repite Contraseña:</label><input type="password" ></p>
+				<p><a href="" class="usuarioregistro">Registrarse</a></p>
 			</form>
 		</section>
 		<section id="contEmpresarial" style="display:none">
 			<h2>Usuario Empresarial</h2>
-			<form action="">
+			<p>Todos los campor con un  <strong>*</strong>  son obligatorios</p>
+			<form action="" method=	"POST">
 				{% csrf_token %}
-				{{ Empresaform.as_p }}
+				<h6>Datos del Representante legal</h6><br>
+					{{ cliente.as_p}}
+				<h6>Datos de la Empresa</h6><br>
+					{{ empresa.as_p}}
+				<h6>Datos de Usuario:</h6><br>
+					{{ usuario.as_p}}
+				<input type="submit" value="Registrarse" class="boton">
 			</form>
 		</section>
 	</section>

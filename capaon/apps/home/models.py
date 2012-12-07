@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 # Tuplas que son Utilizadas en los modelos de datos
 
@@ -33,7 +35,6 @@ class Contacto(models.Model):
 		return self.Empresa
 
 
-
 # Modelo para definir los horarios de los cursos
 class Horario(models.Model):
 	Dia = models.CharField(max_length=40, choices = dias)
@@ -52,35 +53,18 @@ class Facilitador(models.Model):
 
 	def __unicode__(self):
 		return self.Nombre
-	class Admin:
-		list_display = ('Nombre')
-		list_filter = ('Nombre')
-		ordering = ('-Nombre')
-		search_fields = ('Nombre')
-
 	
-class Cliente(models.Model):
-	Estado = models.CharField(choices = estadoCliente, max_length=50)
-	Potencial = models.BooleanField()
-
-
-# Este es el modelo inicial de cliente (Todavia es suceptible a modificaciones)
-class Cliente(models.Model):
-	Estado = models.CharField(choices = estadoCliente, max_length=50)
-	Potencial = models.BooleanField(help_text='Es cliente potencial?')
-
-
 
 # modelo para guardar los clientes que se han inscrito en alguno de los cursos ofertados
 class Inscrito(models.Model):
-	cliente = models.ForeignKey(Cliente, help_text='Escoja un cliente de la lista')
+	cliente = models.ForeignKey(User, help_text='Escoja un cliente de la lista')
 	fechaInscripcion = models.DateTimeField(auto_now_add=True)
 
 
 
 # modelo para guardar los clientes que se han matriculado en alguno de los cursos ofertados
 class Matriculado(models.Model):
-	cliente = models.ForeignKey(Cliente, help_text='Escoja un cliente de la lista')
+	cliente = models.ForeignKey(User, help_text='Escoja un cliente de la lista')
 	fechaMatricula = models.DateTimeField(auto_now_add=True)
 
 
@@ -124,27 +108,26 @@ class Modulo(models.Model):
 class Empresa(models.Model):	
 	RazonSocial = models.CharField(max_length=100)
 	NIT = models.CharField(max_length=100, primary_key=True)
-	Direccion = models.CharField(max_length=150)
 	Actividad = models.CharField(max_length=100)
-	Telefono = models.CharField(max_length=30)
 	Fax = models.CharField(max_length=30)
-	Email = models.EmailField(unique=True)
-	Pais = models.CharField(max_length=50, choices=pais)
 	
 	def __unicode__(self):
-		return self.Nombre
+		return self.RazonSocial
 
+class PerfilCliente(models.Model):
+	user = models.OneToOneField(User, related_name='perfil')
+	cedula = models.CharField(max_length=100)
+	direccion = models.CharField(max_length=100)
+	fechaNacimiento = models.DateField(null=True)
+	telefono = models.CharField(max_length=30)
+	celular  = models.CharField(max_length=100)
+	pais = models.CharField(max_length=50, choices=pais)
+	potencial = models.BooleanField(default=False)
+	tipo = models.CharField(max_length=50, choices = (('empresa','Empresa'),('individual','Individual')))
+	empresa = models.ForeignKey(Empresa, unique=True, blank=True, null=True)
 
-class Individual(models.Model):
-	Nombre = models.CharField(max_length=100)
-	Apellido = models.CharField(max_length=100)
-	Cedula = models.CharField(max_length=100)
-	Direccion = models.CharField(max_length=100)
-	FechaNacimiento = models.DateField()
-	Telefono = models.CharField(max_length=30)
-	Celular = models.CharField(max_length=100)
-	Email = models.EmailField(unique=True)
-	Pais = models.CharField(max_length=50, choices=pais)
+	class Meta:
+         verbose_name = "Cliente"
 	
 	def __unicode__(self):
-		return self.Nombre + self.Apellido
+		return self.usuario.first_name+ self.usuario.last_name
