@@ -35,17 +35,26 @@
 						</nav>
 						</div>
 					</header>
-					<section id="login">
-						<label for="Usuario">Usuario:
-							<input type="text" class="camposesion" >
-						</label>
-						<label for="pasword" >Contraseña:
-							<input type="password" name="password" class="camposesion" >
-						</label>
-						<a href="" class="botonLogin" >Iniciar sesion</a>
-						<strong style="margin-left:35px">No estas registrado aún?</strong>
-						<a class="botonLogin" href="{% url vista_registro %}" >Registrate</a>
-					</section>
+					{% block registrosesion %}	
+						{% if  user.is_authenticated and not user.is_staff%}
+							Bienvenido {{user.username }} <br> <a href="/logout/">Cerrar Sesion</a>
+						{% else %}
+							<section id="login">
+								<form action="/login/" method='POST' id="loginform">
+									{% csrf_token %}
+									<label for="Usuario">Usuario:
+										<input type="text" class="camposesion" name="nickname">
+									</label>
+									<label for="pasword" >Contraseña:
+										<input type="password" name="password" class="camposesion" >
+									</label>
+									<a href="{% url login %}"><input type="submit" class="botonLogin" value="Iniciar Sesion"></a>
+								</form>
+								<strong style="margin-left:35px">No estas registrado aún?</strong>
+								<a class="botonLogin" href="{% url vista_registro %}" >Registrate</a>
+							</section>
+						{% endif %}
+					{% endblock registrosesion %}
 				</div>
 				</div>
 			</div>
@@ -95,12 +104,12 @@
 						</section>
 						<section class="col2 right">
 							<h4>Buscas Algo?</h4>
-							<form id="newsletter" method="post">
+							<form id="newsletter" method="POST">
 								<div>
 									<div class="wrapper">
-										<input class="input" type="text" placeholder="criterio de busqueda">
+										<input class="input" type="text" name="search" id="search" placeholder="criterio de busqueda">
 									</div>
-									<a href="#" class="button" onclick="document.getElementById('newsletter').submit()">Buscar</a>
+									<a href="{% url vista_search %}" class="button" onclick="document.getElementById('newsletter').submit()">Buscar</a>
 								</div>
 							</form>
 						</section>
@@ -108,13 +117,13 @@
 				</article>
 	<!-- content end -->
 			</div>
-		</div>
 		<div class="main">
-		<!-- footer -->
-			<footer>
-				&copy Felipe Salazar
-			</footer>
-		<!-- footer end -->
+			<!-- footer -->
+				<footer>
+					&copy Felipe Salazar
+				</footer>
+			<!-- footer end -->
+		</div>
 		</div>
 	</body>
 </html>		

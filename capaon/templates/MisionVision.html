@@ -30,12 +30,12 @@
 {% block datos %}
 	{% if contacto %}
 		{% for c in contacto  %}
-			<h4>{{c.Empresa}}</h4>
+			<h4>{{c.empresa}}</h4>
 			<ul class="address">
-				<li><span>País:</span>{{ c.Pais }}</li>
-				<li><span>Ciudad:</span>{{ c.Ciudad }}</li>
-				<li><span>Teléfono:</span>{{ c.Telefono }}</li>
-				<li><span>Email:</span><a href="mailto:">{{ c.Email }}</a></li>
+				<li><span>País:</span>{{ c.pais }}</li>
+				<li><span>Ciudad:</span>{{ c.ciudad }}</li>
+				<li><span>Teléfono:</span>{{ c.telefono }}</li>
+				<li><span>Email:</span><a href="mailto:">{{ c.email }}</a></li>
 			</ul>
 		{% endfor %}
 	{% else %}

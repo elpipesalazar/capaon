@@ -8,52 +8,44 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Contenido'
-        db.create_table('home_contenido', (
+        # Adding model 'DatosEmpresa'
+        db.create_table('home_datosempresa', (
             ('titulo', self.gf('django.db.models.fields.CharField')(max_length=100, primary_key=True)),
             ('Contenido', self.gf('django.db.models.fields.TextField')()),
         ))
-        db.send_create_signal('home', ['Contenido'])
+        db.send_create_signal('home', ['DatosEmpresa'])
 
         # Adding model 'Contacto'
         db.create_table('home_contacto', (
-            ('Empresa', self.gf('django.db.models.fields.CharField')(max_length=100, primary_key=True)),
-            ('Pais', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('Ciudad', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('Telefono', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('Email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
+            ('empresa', self.gf('django.db.models.fields.CharField')(max_length=100, primary_key=True)),
+            ('pais', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('ciudad', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('telefono', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
         ))
         db.send_create_signal('home', ['Contacto'])
 
         # Adding model 'Horario'
         db.create_table('home_horario', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('Dia', self.gf('django.db.models.fields.CharField')(max_length=40)),
-            ('De', self.gf('django.db.models.fields.CharField')(max_length=40)),
-            ('Hasta', self.gf('django.db.models.fields.CharField')(max_length=40)),
+            ('dia', self.gf('django.db.models.fields.CharField')(max_length=40)),
+            ('de', self.gf('django.db.models.fields.CharField')(max_length=40)),
+            ('hasta', self.gf('django.db.models.fields.CharField')(max_length=40)),
         ))
         db.send_create_signal('home', ['Horario'])
 
         # Adding model 'Facilitador'
         db.create_table('home_facilitador', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('Nombre', self.gf('django.db.models.fields.CharField')(unique=True, max_length=100)),
-            ('Descripcion', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('nombre', self.gf('django.db.models.fields.CharField')(unique=True, max_length=100)),
+            ('descripcion', self.gf('django.db.models.fields.TextField')(blank=True)),
         ))
         db.send_create_signal('home', ['Facilitador'])
-
-        # Adding model 'Cliente'
-        db.create_table('home_cliente', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('Estado', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('Potencial', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal('home', ['Cliente'])
 
         # Adding model 'Inscrito'
         db.create_table('home_inscrito', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('cliente', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['home.Cliente'])),
+            ('cliente', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('fechaInscripcion', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
         db.send_create_signal('home', ['Inscrito'])
@@ -61,7 +53,7 @@ class Migration(SchemaMigration):
         # Adding model 'Matriculado'
         db.create_table('home_matriculado', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('cliente', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['home.Cliente'])),
+            ('cliente', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('fechaMatricula', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
         db.send_create_signal('home', ['Matriculado'])
@@ -69,89 +61,97 @@ class Migration(SchemaMigration):
         # Adding model 'Curso'
         db.create_table('home_curso', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('NombreCurso', self.gf('django.db.models.fields.CharField')(unique=True, max_length=100)),
-            ('Generalidades', self.gf('django.db.models.fields.TextField')()),
-            ('Objetivos', self.gf('django.db.models.fields.TextField')()),
-            ('Duracion', self.gf('django.db.models.fields.IntegerField')()),
-            ('Metodologia', self.gf('django.db.models.fields.TextField')()),
-            ('Estado', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('CupoMin', self.gf('django.db.models.fields.IntegerField')(default=20)),
-            ('CupoMax', self.gf('django.db.models.fields.IntegerField')(default=30)),
-            ('InicioInscripciones', self.gf('django.db.models.fields.DateField')(auto_now=True, blank=True)),
-            ('FinalInscripciones', self.gf('django.db.models.fields.DateField')()),
-            ('FechaInicio', self.gf('django.db.models.fields.DateField')()),
-            ('FechaFinal', self.gf('django.db.models.fields.DateField')()),
+            ('nombre', self.gf('django.db.models.fields.CharField')(unique=True, max_length=100)),
+            ('generalidades', self.gf('django.db.models.fields.TextField')()),
+            ('objetivos', self.gf('django.db.models.fields.TextField')()),
+            ('duracion', self.gf('django.db.models.fields.IntegerField')()),
+            ('metodologia', self.gf('django.db.models.fields.TextField')()),
+            ('estado', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('cupoMin', self.gf('django.db.models.fields.IntegerField')(default=20)),
+            ('cupoMax', self.gf('django.db.models.fields.IntegerField')(default=30)),
+            ('inicioInscripciones', self.gf('django.db.models.fields.DateField')(auto_now=True, blank=True)),
+            ('finalInscripciones', self.gf('django.db.models.fields.DateField')()),
+            ('fechaInicio', self.gf('django.db.models.fields.DateField')()),
+            ('fechaFinal', self.gf('django.db.models.fields.DateField')()),
         ))
         db.send_create_signal('home', ['Curso'])
 
-        # Adding M2M table for field Horario on 'Curso'
-        db.create_table('home_curso_Horario', (
+        # Adding M2M table for field horario on 'Curso'
+        db.create_table('home_curso_horario', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('curso', models.ForeignKey(orm['home.curso'], null=False)),
             ('horario', models.ForeignKey(orm['home.horario'], null=False))
         ))
-        db.create_unique('home_curso_Horario', ['curso_id', 'horario_id'])
+        db.create_unique('home_curso_horario', ['curso_id', 'horario_id'])
 
-        # Adding M2M table for field Inscritos on 'Curso'
-        db.create_table('home_curso_Inscritos', (
+        # Adding M2M table for field inscritos on 'Curso'
+        db.create_table('home_curso_inscritos', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('curso', models.ForeignKey(orm['home.curso'], null=False)),
             ('inscrito', models.ForeignKey(orm['home.inscrito'], null=False))
         ))
-        db.create_unique('home_curso_Inscritos', ['curso_id', 'inscrito_id'])
+        db.create_unique('home_curso_inscritos', ['curso_id', 'inscrito_id'])
 
-        # Adding M2M table for field Matriculados on 'Curso'
-        db.create_table('home_curso_Matriculados', (
+        # Adding M2M table for field matriculados on 'Curso'
+        db.create_table('home_curso_matriculados', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('curso', models.ForeignKey(orm['home.curso'], null=False)),
             ('matriculado', models.ForeignKey(orm['home.matriculado'], null=False))
         ))
-        db.create_unique('home_curso_Matriculados', ['curso_id', 'matriculado_id'])
+        db.create_unique('home_curso_matriculados', ['curso_id', 'matriculado_id'])
 
         # Adding model 'Modulo'
         db.create_table('home_modulo', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('Numero', self.gf('django.db.models.fields.IntegerField')()),
-            ('Nombre', self.gf('django.db.models.fields.CharField')(unique=True, max_length=150)),
-            ('Duracion', self.gf('django.db.models.fields.IntegerField')()),
-            ('Facilitador', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['home.Facilitador'], null=True)),
-            ('Contenido', self.gf('django.db.models.fields.TextField')()),
-            ('Curso', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['home.Curso'])),
+            ('numero', self.gf('django.db.models.fields.IntegerField')()),
+            ('nombre', self.gf('django.db.models.fields.CharField')(unique=True, max_length=150)),
+            ('duracion', self.gf('django.db.models.fields.IntegerField')()),
+            ('facilitador', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['home.Facilitador'], null=True)),
+            ('contenido', self.gf('django.db.models.fields.TextField')()),
+            ('curso', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['home.Curso'])),
         ))
         db.send_create_signal('home', ['Modulo'])
 
+        # Adding model 'PerfilCliente'
+        db.create_table('home_perfilcliente', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='perfil', unique=True, to=orm['auth.User'])),
+            ('nombre', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('apellidos', self.gf('django.db.models.fields.CharField')(max_length=60)),
+            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
+            ('cedula', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('direccion', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('fechaNacimiento', self.gf('django.db.models.fields.DateField')(null=True)),
+            ('telefono', self.gf('django.db.models.fields.CharField')(max_length=30)),
+            ('celular', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('ciudad', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
+            ('pais', self.gf('django.db.models.fields.CharField')(max_length=50)),
+        ))
+        db.send_create_signal('home', ['PerfilCliente'])
+
         # Adding model 'Empresa'
         db.create_table('home_empresa', (
-            ('RazonSocial', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('NIT', self.gf('django.db.models.fields.CharField')(max_length=100, primary_key=True)),
-            ('Direccion', self.gf('django.db.models.fields.CharField')(max_length=150)),
-            ('Actividad', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('Telefono', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('Fax', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('Email', self.gf('django.db.models.fields.EmailField')(unique=True, max_length=75)),
-            ('Pais', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('razonSocial', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('nit', self.gf('django.db.models.fields.CharField')(max_length=100, primary_key=True)),
+            ('actividad', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('fax', self.gf('django.db.models.fields.CharField')(max_length=30)),
+            ('representante', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['home.PerfilCliente'], unique=True)),
         ))
         db.send_create_signal('home', ['Empresa'])
 
-        # Adding model 'Individual'
-        db.create_table('home_individual', (
+        # Adding model 'Cliente'
+        db.create_table('home_cliente', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('Nombre', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('Apellido', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('Cedula', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('Direccion', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('FechaNacimiento', self.gf('django.db.models.fields.DateField')()),
-            ('Telefono', self.gf('django.db.models.fields.CharField')(max_length=30)),
-            ('Celular', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('Email', self.gf('django.db.models.fields.EmailField')(unique=True, max_length=75)),
-            ('Pais', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('perfil', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['home.PerfilCliente'], unique=True)),
+            ('tipo', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('potencial', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
-        db.send_create_signal('home', ['Individual'])
+        db.send_create_signal('home', ['Cliente'])
 
 
     def backwards(self, orm):
-        # Deleting model 'Contenido'
-        db.delete_table('home_contenido')
+        # Deleting model 'DatosEmpresa'
+        db.delete_table('home_datosempresa')
 
         # Deleting model 'Contacto'
         db.delete_table('home_contacto')
@@ -162,9 +162,6 @@ class Migration(SchemaMigration):
         # Deleting model 'Facilitador'
         db.delete_table('home_facilitador')
 
-        # Deleting model 'Cliente'
-        db.delete_table('home_cliente')
-
         # Deleting model 'Inscrito'
         db.delete_table('home_inscrito')
 
@@ -174,122 +171,161 @@ class Migration(SchemaMigration):
         # Deleting model 'Curso'
         db.delete_table('home_curso')
 
-        # Removing M2M table for field Horario on 'Curso'
-        db.delete_table('home_curso_Horario')
+        # Removing M2M table for field horario on 'Curso'
+        db.delete_table('home_curso_horario')
 
-        # Removing M2M table for field Inscritos on 'Curso'
-        db.delete_table('home_curso_Inscritos')
+        # Removing M2M table for field inscritos on 'Curso'
+        db.delete_table('home_curso_inscritos')
 
-        # Removing M2M table for field Matriculados on 'Curso'
-        db.delete_table('home_curso_Matriculados')
+        # Removing M2M table for field matriculados on 'Curso'
+        db.delete_table('home_curso_matriculados')
 
         # Deleting model 'Modulo'
         db.delete_table('home_modulo')
 
+        # Deleting model 'PerfilCliente'
+        db.delete_table('home_perfilcliente')
+
         # Deleting model 'Empresa'
         db.delete_table('home_empresa')
 
-        # Deleting model 'Individual'
-        db.delete_table('home_individual')
+        # Deleting model 'Cliente'
+        db.delete_table('home_cliente')
 
 
     models = {
+        'auth.group': {
+            'Meta': {'object_name': 'Group'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '80'}),
+            'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'})
+        },
+        'auth.permission': {
+            'Meta': {'ordering': "('content_type__app_label', 'content_type__model', 'codename')", 'unique_together': "(('content_type', 'codename'),)", 'object_name': 'Permission'},
+            'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+        },
+        'auth.user': {
+            'Meta': {'object_name': 'User'},
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
+            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
+            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
+        },
+        'contenttypes.contenttype': {
+            'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
+            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+        },
         'home.cliente': {
-            'Estado': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'Meta': {'object_name': 'Cliente'},
-            'Potencial': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'perfil': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['home.PerfilCliente']", 'unique': 'True'}),
+            'potencial': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'tipo': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
         'home.contacto': {
-            'Ciudad': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'Email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
-            'Empresa': ('django.db.models.fields.CharField', [], {'max_length': '100', 'primary_key': 'True'}),
             'Meta': {'object_name': 'Contacto'},
-            'Pais': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'Telefono': ('django.db.models.fields.CharField', [], {'max_length': '50'})
-        },
-        'home.contenido': {
-            'Contenido': ('django.db.models.fields.TextField', [], {}),
-            'Meta': {'object_name': 'Contenido'},
-            'titulo': ('django.db.models.fields.CharField', [], {'max_length': '100', 'primary_key': 'True'})
+            'ciudad': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
+            'empresa': ('django.db.models.fields.CharField', [], {'max_length': '100', 'primary_key': 'True'}),
+            'pais': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'telefono': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
         'home.curso': {
-            'CupoMax': ('django.db.models.fields.IntegerField', [], {'default': '30'}),
-            'CupoMin': ('django.db.models.fields.IntegerField', [], {'default': '20'}),
-            'Duracion': ('django.db.models.fields.IntegerField', [], {}),
-            'Estado': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'FechaFinal': ('django.db.models.fields.DateField', [], {}),
-            'FechaInicio': ('django.db.models.fields.DateField', [], {}),
-            'FinalInscripciones': ('django.db.models.fields.DateField', [], {}),
-            'Generalidades': ('django.db.models.fields.TextField', [], {}),
-            'Horario': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['home.Horario']", 'symmetrical': 'False'}),
-            'InicioInscripciones': ('django.db.models.fields.DateField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'Inscritos': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['home.Inscrito']", 'symmetrical': 'False', 'blank': 'True'}),
-            'Matriculados': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['home.Matriculado']", 'symmetrical': 'False', 'blank': 'True'}),
             'Meta': {'object_name': 'Curso'},
-            'Metodologia': ('django.db.models.fields.TextField', [], {}),
-            'NombreCurso': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'}),
-            'Objetivos': ('django.db.models.fields.TextField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+            'cupoMax': ('django.db.models.fields.IntegerField', [], {'default': '30'}),
+            'cupoMin': ('django.db.models.fields.IntegerField', [], {'default': '20'}),
+            'duracion': ('django.db.models.fields.IntegerField', [], {}),
+            'estado': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'fechaFinal': ('django.db.models.fields.DateField', [], {}),
+            'fechaInicio': ('django.db.models.fields.DateField', [], {}),
+            'finalInscripciones': ('django.db.models.fields.DateField', [], {}),
+            'generalidades': ('django.db.models.fields.TextField', [], {}),
+            'horario': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['home.Horario']", 'symmetrical': 'False'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'inicioInscripciones': ('django.db.models.fields.DateField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'inscritos': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['home.Inscrito']", 'symmetrical': 'False', 'blank': 'True'}),
+            'matriculados': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['home.Matriculado']", 'symmetrical': 'False', 'blank': 'True'}),
+            'metodologia': ('django.db.models.fields.TextField', [], {}),
+            'nombre': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'}),
+            'objetivos': ('django.db.models.fields.TextField', [], {})
+        },
+        'home.datosempresa': {
+            'Contenido': ('django.db.models.fields.TextField', [], {}),
+            'Meta': {'object_name': 'DatosEmpresa'},
+            'titulo': ('django.db.models.fields.CharField', [], {'max_length': '100', 'primary_key': 'True'})
         },
         'home.empresa': {
-            'Actividad': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'Direccion': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
-            'Email': ('django.db.models.fields.EmailField', [], {'unique': 'True', 'max_length': '75'}),
-            'Fax': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
             'Meta': {'object_name': 'Empresa'},
-            'NIT': ('django.db.models.fields.CharField', [], {'max_length': '100', 'primary_key': 'True'}),
-            'Pais': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'RazonSocial': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'Telefono': ('django.db.models.fields.CharField', [], {'max_length': '30'})
+            'actividad': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'fax': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
+            'nit': ('django.db.models.fields.CharField', [], {'max_length': '100', 'primary_key': 'True'}),
+            'razonSocial': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'representante': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['home.PerfilCliente']", 'unique': 'True'})
         },
         'home.facilitador': {
-            'Descripcion': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'Meta': {'object_name': 'Facilitador'},
-            'Nombre': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+            'descripcion': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'nombre': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'})
         },
         'home.horario': {
-            'De': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
-            'Dia': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
-            'Hasta': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
             'Meta': {'object_name': 'Horario'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
-        },
-        'home.individual': {
-            'Apellido': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'Cedula': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'Celular': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'Direccion': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'Email': ('django.db.models.fields.EmailField', [], {'unique': 'True', 'max_length': '75'}),
-            'FechaNacimiento': ('django.db.models.fields.DateField', [], {}),
-            'Meta': {'object_name': 'Individual'},
-            'Nombre': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'Pais': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'Telefono': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
+            'de': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
+            'dia': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
+            'hasta': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         'home.inscrito': {
             'Meta': {'object_name': 'Inscrito'},
-            'cliente': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['home.Cliente']"}),
+            'cliente': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
             'fechaInscripcion': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         'home.matriculado': {
             'Meta': {'object_name': 'Matriculado'},
-            'cliente': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['home.Cliente']"}),
+            'cliente': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
             'fechaMatricula': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         'home.modulo': {
-            'Contenido': ('django.db.models.fields.TextField', [], {}),
-            'Curso': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['home.Curso']"}),
-            'Duracion': ('django.db.models.fields.IntegerField', [], {}),
-            'Facilitador': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['home.Facilitador']", 'null': 'True'}),
             'Meta': {'object_name': 'Modulo'},
-            'Nombre': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '150'}),
-            'Numero': ('django.db.models.fields.IntegerField', [], {}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+            'contenido': ('django.db.models.fields.TextField', [], {}),
+            'curso': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['home.Curso']"}),
+            'duracion': ('django.db.models.fields.IntegerField', [], {}),
+            'facilitador': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['home.Facilitador']", 'null': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'nombre': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '150'}),
+            'numero': ('django.db.models.fields.IntegerField', [], {})
+        },
+        'home.perfilcliente': {
+            'Meta': {'object_name': 'PerfilCliente'},
+            'apellidos': ('django.db.models.fields.CharField', [], {'max_length': '60'}),
+            'cedula': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'celular': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'ciudad': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
+            'direccion': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
+            'fechaNacimiento': ('django.db.models.fields.DateField', [], {'null': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'nombre': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'pais': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'telefono': ('django.db.models.fields.CharField', [], {'max_length': '30'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'perfil'", 'unique': 'True', 'to': "orm['auth.User']"})
         }
     }
 

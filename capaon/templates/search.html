@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block titulo %} CAPAON - Servicios de Capacitación {% endblock %}
+
+{% block cuerpo %}
+	{% if search_results %}
+		{% for result in search_results %}
+	    	<p>{{result.title}}, {{result.url}}</p>
+	    {% endfor %}
+	{% else %}
+		No se encontró nada
+	{% endif %}
+	
+{% endblock %}
+
+{% block datos %}
+	{% if contacto %}
+		{% for c in contacto  %}
+			<h4>{{c.empresa}}</h4>
+			<ul class="address">
+				<li><span>País:</span>{{ c.pais }}</li>
+				<li><span>Ciudad:</span>{{ c.ciudad }}</li>
+				<li><span>Teléfono:</span>{{ c.telefono }}</li>
+				<li><span>Email:</span><a href="mailto:">{{ c.email }}</a></li>
+			</ul>
+		{% endfor %}
+	{% else %}
+		<h4>datos no definidos</h4>
+	{% endif %}
+{% endblock datos %}

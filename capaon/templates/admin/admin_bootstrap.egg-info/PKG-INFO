@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: admin-bootstrap
+Version: 0.1
+Summary: Provides a Twitter bootstrap based interface for django admin.
+Home-page: https://github.com/gkuhn1/django-admin-templates-twitter-bootstrap
+Author: Guilherme Kuhn
+Author-email: g.kuhn0@gmail.com
+License: GPL
+Description: UNKNOWN
+Platform: UNKNOWN

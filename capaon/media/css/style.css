@@ -11,7 +11,7 @@ body{background:#000;border:0;font:14px "Trebuchet MS", Arial, Helvetica, sans-s
 .css3{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;box-shadow:0 0 4px rgba(0, 0, 0, .4);-moz-box-shadow:0 0 4px rgba(0, 0, 0, .4);-webkit-box-shadow:0 0 4px rgba(0, 0, 0, .4);position:relative}
 .body1{background:url(/media/images/bg.jpg) bottom center repeat}
 .body2{background:url(/media/images/bg_top2.gif) bottom repeat-x}
-.body3{background:#fff; padding-top: 20px; min-height: 200px;}
+.body3{background:#fff; padding-top: 70px; min-height: 250px;}
 .body4{background:url(/media/images/bg.jpg) top center repeat}
 .body5{background:url(/media/images/bg_top_img.jpg) center bottom no-repeat}
 /* Global Structure ============================================================= */
@@ -126,7 +126,7 @@ input {width:269px;height:18px;border:1px solid #e5e5e5;background:#fff;padding:
 #newsletter a{float:right;width:90px;height:32px;background:#fff;line-height:32px;color:#000;font-weight:bold;text-align:center;font-style:normal;text-decoration:none}
 #newsletter a:hover{background:#60b000;color:#fff}
 .boton{margin-left: 10px;float: right;width: 150px;font-style: normal;font-weight: bold;color: white;height: 42px;line-height: 40px;text-decoration: none;background: #60B000;text-align: center;}
-.botonLogin{margin-left: 15px;display: inline-block; width: 100px;font-style: normal;font-weight: bold;color: white;height: 30px;line-height: 30px;text-decoration: none;background: #60B000;text-align: center;}
+.botonLogin{border: none;margin-left: 15px;display: inline-block; width: 100px;font-style: normal;font-weight: bold;color: white;height: 30px;line-height: 30px;text-decoration: none;background: #60B000;text-align: center;}
 .boton:hover,.botonLogin:hover{background: #080808;}
 .errorlist{color:red;}
 #login{padding: 30px}
@@ -236,3 +236,9 @@ input {width:269px;height:18px;border:1px solid #e5e5e5;background:#fff;padding:
 	text-align: center;
 	width: 35%;
 }
+
+#loginform{
+	display: inline-block;
+	width: 50%;
+}
+#loginform label , a, strong{ vertical-align: bottom;}

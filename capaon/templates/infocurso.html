@@ -3,35 +3,40 @@
 {% block titulo %} CAPAON - Servicios de Capacitación {% endblock %}
 {% block cuerpo %}
 	{% if curso %}
-			<h2 class="under">{{ curso.Nombre}}</h2>
+			<h2 class="under">{{ curso.nombre}}</h2>
 			<h3>Generalidades</h3>
-			<p>{{ curso.Generalidades }}</p><br><br>
+			<p>{{ curso.generalidades }}</p><br><br>
 			<h3>Duración</h3>
-			<h3><span class="dropcap">{{ curso.Duracion }}</span> horas	</h3><br><br><br>
+			<h3><span class="dropcap">{{ curso.duracion }}</span> horas	</h3><br><br><br>
 			<h3>Objetivos</h3>
-			{{ curso.Objetivos|linebreaks}}
+			{{ curso.objetivos|linebreaks}}
 			<h3>Horario</h3>
 			<ul>
 				{{horario|unordered_list}}
 			</ul><br>
 			<h3>Metodología</h3>
-			<p>{{ curso.Metodologia}}</p>	
+			<p>{{ curso.metodologia}}</p>	
 			<br>
 			<h3>Cupos</h3>
-			<h6>Mínimo : {{ curso.CupoMin }}</h6>
-			<h6>Máximo : {{ curso.CupoMax }}</h6><br><br>
+			<h6>Mínimo : {{ curso.cupoMin }}</h6>
+			<h6>Máximo : {{ curso.cupoMax }}</h6><br><br>
 			<h3>Contenido</h3>
 			
 			{% if modulos %}
 				{% for con in modulos  %}
-					<h6>Módulo {{ con.Numero }} - {{ con.Nombre }}</h6>
-					<h6>Facilitador ({{ con.Facilitador }})</h6><br>
+					<h6>Módulo {{ con.numero }} - {{ con.nombre }}</h6>
+					<h6>Facilitador ({{ con.facilitador }})</h6><br>
 					<ul class="modulo">
-						<li>{{ con.Contenido|replace|linebreaks}}</li>
+						<li>{{ con.contenido|replace|linebreaks}}</li>
 					</ul>
 				{% endfor %}			
 			{% endif %}
-			<a href="" class="boton"> Inscribirse </a>
+			{% if user.is_authenticated and not user.is_staff %}
+				<a href="" class="boton"> Inscribirse </a>
+				<h6>Recuerda que al inscribirte en este curso tienes 24 horas para pagar tu matrícula. Si pagas durante este tiempo, se liberará el cupo y tendrás que inscribirte de nuevo. Siempre y cuando queden cupos disponibles y además el curso este en fecha de inscripciones</h6>	
+			{% else %}
+				<h3>Si quieres inscribirte en este curso <a class="boton">Regístrate</a> </h3>
+			{% endif %}
 	{% else %}
 		<h3>No Hay Datos para el curso Solicitado</h3>
 	{% endif %}
@@ -40,12 +45,12 @@
 {% block datos %}
 	{% if contacto %}
 		{% for c in contacto  %}
-			<h4>{{c.Empresa}}</h4>
+			<h4>{{c.empresa}}</h4>
 			<ul class="address">
-				<li><span>País:</span>{{ c.Pais }}</li>
-				<li><span>Ciudad:</span>{{ c.Ciudad }}</li>
-				<li><span>Teléfono:</span>{{ c.Telefono }}</li>
-				<li><span>Email:</span><a href="mailto:">{{ c.Email }}</a></li>
+				<li><span>País:</span>{{ c.pais }}</li>
+				<li><span>Ciudad:</span>{{ c.ciudad }}</li>
+				<li><span>Teléfono:</span>{{ c.telefono }}</li>
+				<li><span>Email:</span><a href="mailto:">{{ c.email }}</a></li>
 			</ul>
 		{% endfor %}
 	{% else %}

@@ -1,50 +1,27 @@
 {% extends "base.html" %}
-
-{% block scripts %}
-	<script type="text/javascript">
-		jQuery(document).ready(function($) {
-			$("#individual").click(function(){
-				$("#contEmpresarial").slideUp();
-				$("#contIndividual").slideDown();
-			});
-			$("#empresarial").click(function(){
-				$("#contIndividual").slideUp();
-				$("#contEmpresarial").slideDown();
-			});
-		});
-	</script>
-{% endblock scripts %}
 {% block titulo %}Registro de Cliente Empresa {% endblock %}
+{% block registrosesion %}{% endblock registrosesion %}
 {% block cuerpo%}
 	<section class="contRegistro">
 		<div>
 			<h3>Que tipo de usuario eres?</h3>
-			<a class="usuarioregistro" id="individual">Individual</a>
+			<a class="usuarioregistro" href="individual" id="individual">Individual</a>
         	<a class="usuarioregistro" href="empresa" id="empresarial">Empresarial</a>	
 		</div>
-		<section id="contIndividual" style="display:none">
-			{% load crispy_forms_tags %}
-			<h2>Usuario Individual</h2>
-			<form action="">
-				{% csrf_token %}
-				{{ Individualform.as_p}}
-				<p><label for="password2">Repite Contraseña:</label><input type="password" ></p>
-				<p><a href="" class="usuarioregistro">Registrarse</a></p>
-			</form>
-		</section>
-		<section id="contEmpresarial" style="display:none">
-			<h2>Usuario Empresarial</h2>
-			<p>Todos los campor con un  <strong>*</strong>  son obligatorios</p>
-			<form action="" method=	"POST">
-				{% csrf_token %}
-				<h6>Datos del Representante legal</h6><br>
-					{{ cliente.as_p}}
-				<h6>Datos de la Empresa</h6><br>
-					{{ empresa.as_p}}
-				<h6>Datos de Usuario:</h6><br>
-					{{ usuario.as_p}}
-				<input type="submit" value="Registrarse" class="boton">
-			</form>
-		</section>
 	</section>
 {% endblock %}
+{% block datos %}
+	{% if contacto %}
+		{% for c in contacto  %}
+			<h4>{{c.empresa}}</h4>
+			<ul class="address">
+				<li><span>País:</span>{{ c.pais }}</li>
+				<li><span>Ciudad:</span>{{ c.ciudad }}</li>
+				<li><span>Teléfono:</span>{{ c.telefono }}</li>
+				<li><span>Email:</span><a href="mailto:">{{ c.email }}</a></li>
+			</ul>
+		{% endfor %}
+	{% else %}
+		<h4>datos no definidos</h4>
+	{% endif %}
+{% endblock datos %}

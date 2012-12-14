@@ -1,0 +1,7 @@
+README
+setup.py
+admin_bootstrap/__init__.py
+admin_bootstrap.egg-info/PKG-INFO
+admin_bootstrap.egg-info/SOURCES.txt
+admin_bootstrap.egg-info/dependency_links.txt
+admin_bootstrap.egg-info/top_level.txt
