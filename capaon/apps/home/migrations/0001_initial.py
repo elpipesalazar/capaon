@@ -42,22 +42,6 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('home', ['Facilitador'])
 
-        # Adding model 'Inscrito'
-        db.create_table('home_inscrito', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('cliente', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('fechaInscripcion', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal('home', ['Inscrito'])
-
-        # Adding model 'Matriculado'
-        db.create_table('home_matriculado', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('cliente', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
-            ('fechaMatricula', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal('home', ['Matriculado'])
-
         # Adding model 'Curso'
         db.create_table('home_curso', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -66,7 +50,7 @@ class Migration(SchemaMigration):
             ('objetivos', self.gf('django.db.models.fields.TextField')()),
             ('duracion', self.gf('django.db.models.fields.IntegerField')()),
             ('metodologia', self.gf('django.db.models.fields.TextField')()),
-            ('estado', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('estado', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
             ('cupoMin', self.gf('django.db.models.fields.IntegerField')(default=20)),
             ('cupoMax', self.gf('django.db.models.fields.IntegerField')(default=30)),
             ('inicioInscripciones', self.gf('django.db.models.fields.DateField')(auto_now=True, blank=True)),
@@ -84,21 +68,24 @@ class Migration(SchemaMigration):
         ))
         db.create_unique('home_curso_horario', ['curso_id', 'horario_id'])
 
-        # Adding M2M table for field inscritos on 'Curso'
-        db.create_table('home_curso_inscritos', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('curso', models.ForeignKey(orm['home.curso'], null=False)),
-            ('inscrito', models.ForeignKey(orm['home.inscrito'], null=False))
+        # Adding model 'Inscrito'
+        db.create_table('home_inscrito', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('curso', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['home.Curso'], null=True)),
+            ('cliente', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True)),
+            ('fechaInscripcion', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, null=True, blank=True)),
+            ('FechaCaducidad', self.gf('django.db.models.fields.DateTimeField')(null=True)),
         ))
-        db.create_unique('home_curso_inscritos', ['curso_id', 'inscrito_id'])
+        db.send_create_signal('home', ['Inscrito'])
 
-        # Adding M2M table for field matriculados on 'Curso'
-        db.create_table('home_curso_matriculados', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('curso', models.ForeignKey(orm['home.curso'], null=False)),
-            ('matriculado', models.ForeignKey(orm['home.matriculado'], null=False))
+        # Adding model 'Matriculado'
+        db.create_table('home_matriculado', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('curso', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['home.Curso'], null=True)),
+            ('cliente', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'], null=True)),
+            ('fechaMatricula', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
-        db.create_unique('home_curso_matriculados', ['curso_id', 'matriculado_id'])
+        db.send_create_signal('home', ['Matriculado'])
 
         # Adding model 'Modulo'
         db.create_table('home_modulo', (
@@ -124,7 +111,7 @@ class Migration(SchemaMigration):
             ('fechaNacimiento', self.gf('django.db.models.fields.DateField')(null=True)),
             ('telefono', self.gf('django.db.models.fields.CharField')(max_length=30)),
             ('celular', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('ciudad', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
+            ('ciudad', self.gf('django.db.models.fields.CharField')(max_length=50, blank=True)),
             ('pais', self.gf('django.db.models.fields.CharField')(max_length=50)),
         ))
         db.send_create_signal('home', ['PerfilCliente'])
@@ -162,23 +149,17 @@ class Migration(SchemaMigration):
         # Deleting model 'Facilitador'
         db.delete_table('home_facilitador')
 
-        # Deleting model 'Inscrito'
-        db.delete_table('home_inscrito')
-
-        # Deleting model 'Matriculado'
-        db.delete_table('home_matriculado')
-
         # Deleting model 'Curso'
         db.delete_table('home_curso')
 
         # Removing M2M table for field horario on 'Curso'
         db.delete_table('home_curso_horario')
 
-        # Removing M2M table for field inscritos on 'Curso'
-        db.delete_table('home_curso_inscritos')
+        # Deleting model 'Inscrito'
+        db.delete_table('home_inscrito')
 
-        # Removing M2M table for field matriculados on 'Curso'
-        db.delete_table('home_curso_matriculados')
+        # Deleting model 'Matriculado'
+        db.delete_table('home_matriculado')
 
         # Deleting model 'Modulo'
         db.delete_table('home_modulo')
@@ -250,7 +231,7 @@ class Migration(SchemaMigration):
             'cupoMax': ('django.db.models.fields.IntegerField', [], {'default': '30'}),
             'cupoMin': ('django.db.models.fields.IntegerField', [], {'default': '20'}),
             'duracion': ('django.db.models.fields.IntegerField', [], {}),
-            'estado': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'estado': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
             'fechaFinal': ('django.db.models.fields.DateField', [], {}),
             'fechaInicio': ('django.db.models.fields.DateField', [], {}),
             'finalInscripciones': ('django.db.models.fields.DateField', [], {}),
@@ -258,8 +239,6 @@ class Migration(SchemaMigration):
             'horario': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['home.Horario']", 'symmetrical': 'False'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'inicioInscripciones': ('django.db.models.fields.DateField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'inscritos': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['home.Inscrito']", 'symmetrical': 'False', 'blank': 'True'}),
-            'matriculados': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['home.Matriculado']", 'symmetrical': 'False', 'blank': 'True'}),
             'metodologia': ('django.db.models.fields.TextField', [], {}),
             'nombre': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'}),
             'objetivos': ('django.db.models.fields.TextField', [], {})
@@ -291,14 +270,17 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         'home.inscrito': {
+            'FechaCaducidad': ('django.db.models.fields.DateTimeField', [], {'null': 'True'}),
             'Meta': {'object_name': 'Inscrito'},
-            'cliente': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'fechaInscripcion': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'cliente': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'}),
+            'curso': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['home.Curso']", 'null': 'True'}),
+            'fechaInscripcion': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
         'home.matriculado': {
             'Meta': {'object_name': 'Matriculado'},
-            'cliente': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'cliente': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True'}),
+            'curso': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['home.Curso']", 'null': 'True'}),
             'fechaMatricula': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
         },
@@ -317,7 +299,7 @@ class Migration(SchemaMigration):
             'apellidos': ('django.db.models.fields.CharField', [], {'max_length': '60'}),
             'cedula': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'celular': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'ciudad': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
+            'ciudad': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
             'direccion': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
             'fechaNacimiento': ('django.db.models.fields.DateField', [], {'null': 'True'}),

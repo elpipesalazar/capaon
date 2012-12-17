@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext 
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm 
-from capaon.apps.home.models import DatosEmpresa, Contacto, Curso, Modulo, Empresa, PerfilCliente, Cliente
+from capaon.apps.home.models import DatosEmpresa, Contacto, Curso, Modulo, Empresa, PerfilCliente, Cliente, Inscrito, Matriculado
 from capaon.apps.home.forms import ClienteForm, ContactForm, EmpresaForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
@@ -11,11 +11,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 import watson
+import datetime
+from django.utils.timezone import is_aware, utc
 
 
 
 #vista del index (pagina incial)
 def index_view(request):
+	loginInvalido = False;
 	titulo = "Capacitaciones Online - CAPAON"
 	quienesSomos = DatosEmpresa.objects.filter(titulo = 'Quienes Somos')
 	contacto = Contacto.objects.all()
@@ -112,9 +115,35 @@ def Infocursos_view(request, idn):
  		curso = Curso.objects.get(id = idn)
  		horario = curso.horario.all()
  		modulos = Modulo.objects.filter(curso__id__exact = idn)
+ 		if request.user.is_authenticated() and not request.user.is_staff:
+ 			estaInscrito = Inscrito.objects.filter(cliente = request.user)
  	except Curso.DoesNotExist:
  		curso = False
  	return render_to_response('infocurso.html',locals(), context_instance = RequestContext(request))
+
+
+
+def inscripcion_view(request, idc):
+	if request.user.is_authenticated() and not request.user.is_staff:
+		fechaInscripcion = datetime.datetime.now(utc)
+		fechaCaducidad = datetime.datetime(fechaInscripcion.year , fechaInscripcion.month, fechaInscripcion.day + 1)
+		curso = Curso.objects.get(id__exact = idc)
+		if curso:
+			nuevoInscrito = Inscrito(curso = curso,cliente =request.user, fechaInscripcion = fechaInscripcion, FechaCaducidad = fechaCaducidad)
+			nuevoInscrito.save()
+			return HttpResponseRedirect('/miscursos/')
+	return HttpResponseRedirect('/')
+
+
+def miscursos_view(request):
+	if request.user.is_authenticated() and not request.user.is_staff:
+		misInscritos    = Inscrito.objects.filter(cliente = request.user)
+		misMatriculados = Matriculado.objects.filter(cliente = request.user) 
+		return render_to_response("miscursos.html", locals(), context_instance = RequestContext(request))
+	return HttpResponseRedirect('/')
+		
+
+
 
 def construccion(request):
 	return render_to_response('404.html', context_instance = RequestContext(request))
@@ -124,13 +153,22 @@ def search_view(request):
 	return render_to_response('search.html', locals(), context_instance = RequestContext(request))
 
 def login_view(request):
-	nickname = request.POST['nickname']
-	password = request.POST['password']
-	usuario = authenticate(username=nickname, password=password)
-	if usuario is not None and usuario.is_active:
-		login(request,usuario)
+	try:
+		nickname = request.POST['nickname']
+		password = request.POST['password']
+		usuario = authenticate(username=nickname, password=password)
+		if usuario is not None and usuario.is_active:
+			login(request,usuario)
+			return HttpResponseRedirect('/')
+	except:
 		return HttpResponseRedirect('/')
-	return HttpResponseRedirect('/')
+	titulo = "Capacitaciones Online - CAPAON"
+	loginInvalido = True;
+	quienesSomos = DatosEmpresa.objects.filter(titulo = 'Quienes Somos')
+	contacto = Contacto.objects.all()
+	cursos = Curso.objects.all()
+	return render_to_response('index.html',locals(),context_instance = RequestContext(request))
+
 
 def logout_view(request):
     logout(request)

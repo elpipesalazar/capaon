@@ -37,16 +37,27 @@
 					</header>
 					{% block registrosesion %}	
 						{% if  user.is_authenticated and not user.is_staff%}
-							Bienvenido {{user.username }} <br> <a href="/logout/">Cerrar Sesion</a>
+						<section id="userManager">
+							<ul id="menuDatos">
+								<li >Bienvenido/a <a href="">{{user.get_profile.nombre}} {{user.get_profile.apellidos}}</a> </li>
+								<li class="{% block clasem5%}{% endblock %}"><span>inscritos y Matriculados</span><a href="/miscursos/">Mis cursos</a></li>
+								<li>Deseas irte?<a href="/logout/">Cerrar Sesion</a></li>
+							</ul>
+							<br> 
+							
+						</section>
 						{% else %}
 							<section id="login">
+								{% if loginInvalido %}
+								<h6 style="color:Red">Usuario o contraseña inválidos</h6>
+								{% endif %}
 								<form action="/login/" method='POST' id="loginform">
 									{% csrf_token %}
 									<label for="Usuario">Usuario:
-										<input type="text" class="camposesion" name="nickname">
+										<input type="text" class="camposesion" name="nickname" required>
 									</label>
 									<label for="pasword" >Contraseña:
-										<input type="password" name="password" class="camposesion" >
+										<input type="password" name="password" class="camposesion" required>
 									</label>
 									<a href="{% url login %}"><input type="submit" class="botonLogin" value="Iniciar Sesion"></a>
 								</form>

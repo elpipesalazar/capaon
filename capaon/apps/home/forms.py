@@ -19,16 +19,18 @@ class EmpresaForm(ModelForm):
 
 
 class ClienteForm(ModelForm):
-	username        = forms.CharField(label=_('Nickname'))
-	nombre          = forms.CharField(label=(u'Nombre'))
-	apellidos       = forms.CharField(label=(u'Apellidos'))
-	email           = forms.EmailField(label=(u'Email'))
-	password        = forms.CharField(label=_(u'Password'), widget=forms.PasswordInput(render_value=False))
-	password1       = forms.CharField(label=_(u'Password confirmation'), widget=forms.PasswordInput(render_value=False))
+	username        = forms.CharField(label=_('Nickname'), widget = forms.TextInput(attrs = {'required':'required'}))
+	nombre          = forms.CharField(label=(u'Nombre'), widget = forms.TextInput(attrs = {'required':'required'}))
+	apellidos       = forms.CharField(label=(u'Apellidos'), widget = forms.TextInput(attrs = {'required':'required'}))
+	email           = forms.EmailField(label=(u'Email'), widget = forms.TextInput(attrs = {'required':'required'}))
+	password        = forms.CharField(label=_(u'Password'), widget=forms.PasswordInput(render_value=False,attrs = {'required':'required'}))
+	password1       = forms.CharField(label=_(u'Password confirmation'), widget=forms.PasswordInput(render_value=False, attrs = {'required':'required'}))
 	fechaNacimiento = forms.DateField(widget=forms.DateInput(format = '%d/%m/%Y'), input_formats=('%d/%m/%Y',)) 
+	celular         = forms.CharField(label=(u'Celular'), widget = forms.TextInput(attrs = {'required':'required'}))
 	error_messages = {
         'duplicate_username': _("A user with that username already exists."),
         'password_mismatch': _("The two password fields didn't match."),
+        'password_empty': _("The password is empty"),
     }
 
 	class Meta:
@@ -45,9 +47,11 @@ class ClienteForm(ModelForm):
                 raise forms.ValidationError(self.error_messages['duplicate_username'])
 
 	def clean(self):
-            if self.cleaned_data['password'] != self.cleaned_data['password1']:
-                    raise forms.ValidationError(self.error_messages['password_mismatch'])
-            return self.cleaned_data
+		if self.cleaned_data['password'] != self.cleaned_data['password1']:
+			raise forms.ValidationError(self.error_messages['password_mismatch'])
+		if self.cleaned_data['password'] == "" or self.cleaned_data['password1'] == "" :
+			raise forms.ValidationError(self.error_messages['password_empty'])
+		return self.cleaned_data
 
 
 

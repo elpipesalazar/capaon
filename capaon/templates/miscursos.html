@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block clasem5 %}active{% endblock clasem5%}
+{% block cuerpo %}
+	<section id="inscritos">	
+		<h3>Cursos Inscritos</h3>
+		{% if misInscritos %}
+			<p>No olvides Matricularte antes de la fecha de caducidad de tu inscripcion <br>Si no lo haces, perderás el cupo en el curso y deberás inscribirte de nuevo (Si aún hay cupos o si el curso está en fecha de inscipciones)</p>
+			{% for c in misInscritos  %}
+				<div>
+					<h3><span class="dropcap">{{ forloop.counter }}</span>{{ c.curso.nombre }}</h3>
+					<figure><img src="/media/images/page4_img{{forloop.counter}}.jpg" alt=""></figure><br>
+					<p class="pad_bot1">{{ c.curso.generalidades}}</p> <br>
+					<h3>Matrícula Hasta  </h3> <p class="pad_bot1">{{ c.FechaCaducidad }}</p>
+					<a href="{{c.id}}" class="link1">Ver info del curso</a>
+					<a class="boton">Matricularme</a> 
+				</div>
+			{% endfor %}	
+		{% else %}
+			<h3>No tienes Cursos Inscritos Aún</h3>
+		{% endif %}	
+	</section>
+	<section id="matriculados">
+		<h3>Cursos Matriculados</h3>
+		{% if misMatriclados %}
+		{% else %}
+			<h3>No tienes Cursos matriculados Aún</h3>	
+		{% endif %}
+	</section>
+{% endblock cuerpo %}

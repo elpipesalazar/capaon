@@ -12,12 +12,22 @@ class AdminFacilitador(admin.ModelAdmin):
 class ModuloInline(admin.TabularInline):
 	model = Modulo
 
+class InscritosInline(admin.TabularInline):
+	model = Inscrito
+
+class AdminInscritos(admin.ModelAdmin):
+	list_display = ('cliente','curso','fechaInscripcion', 'FechaCaducidad')
+	list_filter = ('curso',)
+	search_fields = ('curso__nombre','cliente__first_name', 'cliente__last_name')
+	ordering = ('cliente__first_name',)
+	
+
 class AdminCurso(admin.ModelAdmin):
 	list_display = ('nombre', 'duracion','estado')
 	list_filter = ('duracion', 'estado')
 	ordering = ('-estado',)
 	search_fields = ('nombre',)
-	inlines = [ModuloInline,]
+	inlines = [ModuloInline, InscritosInline]
 
 class AdminModulo(admin.ModelAdmin):
 	list_display = ('numero', 'nombre', 'facilitador','curso')
@@ -56,6 +66,7 @@ class AdminCliente(admin.ModelAdmin):
 	ordering = ('perfil__nombre',)
 	can_delete = False
 
+
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(DatosEmpresa)
@@ -65,7 +76,7 @@ admin.site.register(Facilitador, AdminFacilitador)
 #admin.site.register(Modulo, AdminModulo)
 admin.site.register(Curso, AdminCurso)
 admin.site.register(Empresa)
-admin.site.register(Inscrito)
+admin.site.register(Inscrito,AdminInscritos)
 admin.site.register(Matriculado)
 admin.site.register(PerfilCliente, AdminPerfilCliente)
 admin.site.register(Cliente, AdminCliente)

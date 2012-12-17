@@ -242,3 +242,29 @@ input {width:269px;height:18px;border:1px solid #e5e5e5;background:#fff;padding:
 	width: 50%;
 }
 #loginform label , a, strong{ vertical-align: bottom;}
+#mensaje{text-align: justify; font-size: 16px; color: black; width: 75%}
+#userManager{
+	display: block;
+	height: 70px;
+	background:url(/media/images/bg_top2.gif.jpg) center bottom;
+	overflow: hidden;
+	vertical-align: bottom;
+
+}
+#menuDatos li{
+	display: inline-block;
+	margin: 0 15px;
+	vertical-align: top;
+}
+#menuDatos li a{vertical-align: bottom;display:block;font:20px "Trebuchet MS", Arial, Helvetica, sans-serif;line-height:1.2em;color:#bbb;text-transform:uppercase;text-decoration:none;text-align:center;letter-spacing:-1px;height:25px;font-style:normal;font-weight:700}
+
+#menuDatos li:hover{
+	color: white;
+	background: black;
+}
+#menuDatos li.active a{color:#497e04}
+#menuDatos li a:hover{color:#497e04}
+#menuDatos li:hover a{color:#497e04}
+
+#inscritos, #matriculados{ display: inline-block; width: 45%; }
+#matriculados{ margin-left: 60px}

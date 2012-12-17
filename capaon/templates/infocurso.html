@@ -14,6 +14,8 @@
 			<ul>
 				{{horario|unordered_list}}
 			</ul><br>
+
+			{{curso.inicioInscripciones|timesince:curso.finalInscripciones}}
 			<h3>Metodología</h3>
 			<p>{{ curso.metodologia}}</p>	
 			<br>
@@ -32,10 +34,15 @@
 				{% endfor %}			
 			{% endif %}
 			{% if user.is_authenticated and not user.is_staff %}
-				<a href="" class="boton"> Inscribirse </a>
-				<h6>Recuerda que al inscribirte en este curso tienes 24 horas para pagar tu matrícula. Si pagas durante este tiempo, se liberará el cupo y tendrás que inscribirte de nuevo. Siempre y cuando queden cupos disponibles y además el curso este en fecha de inscripciones</h6>	
+				{% if estaInscrito %}
+					<h3><a href="" class="boton">Matricularse</a></h3>
+				{% else %}
+				<a href="{{curso.id}}/inscripcion" class="boton"> Inscribirse </a>
+				<p id="mensaje"><strong >Recuerda que al inscribirte en este curso tienes 24 horas para pagar tu matrícula. Si no pagas durante este tiempo, se liberará el cupo y tendrás que inscribirte de nuevo. Siempre y cuando queden cupos disponibles y además el curso este en fecha de inscripciones</strong></p>	
+				{% endif %}
 			{% else %}
-				<h3>Si quieres inscribirte en este curso <a class="boton">Regístrate</a> </h3>
+				<h3>Si quieres inscribirte en este curso <a href="/register/" class="boton">Regístrate</a> </h3> <br><br>
+				<h3>Si ya estas inscrito, <a href="#login">Inicia Sesion</a></h3>
 			{% endif %}
 	{% else %}
 		<h3>No Hay Datos para el curso Solicitado</h3>

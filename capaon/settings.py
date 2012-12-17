@@ -131,7 +131,7 @@ INSTALLED_APPS = (
     'watson',
     'django_extensions',
     'crispy_forms',
-    'south',
+ #   'south',
 )
 
 #HAYSTACK_SITECONF = 'capaon.search_sites'
