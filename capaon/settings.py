@@ -169,6 +169,6 @@ LOGGING = {
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'elpipesalazar@gmail.com'
-EMAIL_HOST_PASSWORD = 'elpipe10F'
+EMAIL_HOST_USER = 'afma@gmail.com'
+EMAIL_HOST_PASSWORD = '********'
 EMAIL_PORT = 587
